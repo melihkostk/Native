@@ -27,7 +27,8 @@ export default function Index() {
   const [noteInputShown, setNoteInputShown] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState("");
   const [color, setColor] = React.useState("white");
-  const [deletedShown, setDeletedShown] = React.useState(false)
+  const [deletedShown, setDeletedShown] = React.useState(false);
+  const [archiveShown, setArchiveShown] = React.useState(false)
 
   React.useEffect(() => {
     if (!deletedShown) return;
@@ -38,6 +39,16 @@ export default function Index() {
 
     return () => clearTimeout(timer);
   }, [deletedShown]);
+
+  React.useEffect(() => {
+    if (!archiveShown) return;
+
+    const timer = setTimeout(() => {
+      setArchiveShown(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [archiveShown]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -86,12 +97,16 @@ export default function Index() {
                   setArchivedNotes={setArchivedNotes}
                   setNoteInputShown={setNoteInputShown}
                   setDeletedShown={setDeletedShown}
+                  setArchiveShown={setArchiveShown}
                 />
               ))}
           </View>
         </ScrollView>
         {deletedShown && <View style={styles.deletedInfo}>
           <Text style={styles.deletedInfoText}>Not çöp kutusuna taşındı</Text>
+        </View>}
+        {archiveShown && <View style={styles.deletedInfo}>
+          <Text style={styles.deletedInfoText}>Not arşivlendi</Text>
         </View>}
       </View>
       <Footer setNoteInputShown={setNoteInputShown} />

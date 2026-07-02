@@ -34,6 +34,7 @@ export default function Note(props) {
         const remaining = props.notes.filter(note => note.id !== id)
         props.setNotes(remaining);
         props.setArchivedNotes(prev => [...prev, archived])
+        props.setArchiveShown(prev => !prev)
 
     }
 
