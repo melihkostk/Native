@@ -39,50 +39,50 @@ export default function Sidebar(props) {
 }
 
 const styles = StyleSheet.create({
-    sidebarComponent:{
-        position:"absolute",
-        left:0,
-        backgroundColor:"white",
-        zIndex:50,
-        height:height,
-        width:"70%",
-        padding:8,
-        top:0,
-        bottom:0,
-        borderRightWidth:1,
-        borderRightColor:"#e5e5e5"
+    sidebarComponent: {
+        position: "absolute",
+        left: 0,
+        backgroundColor: "white",
+        zIndex: 50,
+        height: height,
+        width: "70%",
+        padding: 8,
+        top: 0,
+        bottom: 0,
+        borderRightWidth: 1,
+        borderRightColor: "#e5e5e5"
     },
-    title:{
-        fontSize:18,
-        color:"gray"
+    title: {
+        fontSize: 18,
+        color: "gray"
     },
     firstSection: {
         borderBottomWidth: 1,
         borderColor: "#e5e5e5",
-        display:"flex",
-        flexDirection:"row",
-        alignItems:"center",
-        gap:3,
-        paddingHorizontal:20
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 3,
+        paddingHorizontal: 20
     },
     secondSection: {
         borderBottomWidth: 1,
         borderColor: "#e5e5e5",
-        paddingHorizontal:10
+        paddingHorizontal: 10
     },
-    thirdSection:{
-        paddingHorizontal:10
+    thirdSection: {
+        paddingHorizontal: 10
     },
-    links:{
-        fontWeight:600,
-        paddingVertical:10,
-        paddingHorizontal:20,
-        color:"#5F6368"
+    links: {
+        fontWeight: 600,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        color: "#5F6368"
     },
-    linkContainer:{
-        display:"flex",
-        flexDirection:"row",
-        alignItems:"center",
-        padding:8
+    linkContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 8
     }
 })

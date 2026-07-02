@@ -1,9 +1,26 @@
 import React from "react";
-import { Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function NoteInput(props) {
     const [moreShown, setMoreShown] = React.useState(false);
     const [colorShown, setColorShown] = React.useState(false);
+
+    const panResponder = React.useRef(
+        PanResponder.create({
+
+            onStartShouldSetPanResponder: (evt, gestureState) => true,
+            onMoveShouldSetPanResponder: (evt, gestureState) => true,
+
+            onPanResponderMove: (_, gestureState) => { },
+            onPanResponderRelease: (_, gestureState) => {
+                
+                if (gestureState.dy > 30) {
+                    setColorShown(false)
+                    setMoreShown(false)
+                }
+            },
+        }),
+    ).current;
 
     function addNote() {
 
@@ -14,7 +31,7 @@ export default function NoteInput(props) {
                     id: Date.now(),
                     title: props.title,
                     description: props.description,
-                    color:props.color
+                    color: props.color
                 }
             ]);
         }
@@ -24,7 +41,7 @@ export default function NoteInput(props) {
     }
 
     return (
-        <SafeAreaView style={[styles.container , {backgroundColor : props.color}]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: props.color }]}>
             <View style={styles.noteInputHeader}>
                 <Pressable onPress={() => addNote()}>
                     <View>
@@ -62,7 +79,7 @@ export default function NoteInput(props) {
                         <Image source={require("../../assets/images/more.png")}></Image>
                     </Pressable>
                 </View>
-                {colorShown && <View style={styles.colorMenu}>
+                {colorShown && <View {...panResponder.panHandlers} style={styles.colorMenu}>
                     <Text>
                         Renk
                     </Text>
@@ -90,7 +107,7 @@ export default function NoteInput(props) {
                         </Pressable>
                     </View>
                 </View>}
-                {moreShown && <View style={styles.moreMenu}>
+                {moreShown && <View {...panResponder.panHandlers} style={styles.moreMenu}>
                     <View style={styles.moreOptions}>
                         <Image source={require("../../assets/images/small-delete.png")}></Image>
                         <Text>Sil</Text>
@@ -143,13 +160,13 @@ const styles = StyleSheet.create({
     headerRight: {
         display: "flex",
         flexDirection: "row",
-        gap:25
+        gap: 25
     },
     noteInputFooter: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems:"center",
+        alignItems: "center",
         position: "absolute",
         left: 0,
         right: 0,
@@ -157,12 +174,12 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "white",
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)",
-        paddingBottom:35
+        paddingBottom: 35
     },
     footerLeft: {
         display: "flex",
         flexDirection: "row",
-        gap:10
+        gap: 10
     },
     inputArea: {
         marginTop: 20,
@@ -170,12 +187,12 @@ const styles = StyleSheet.create({
     },
     inputTitle: {
         fontSize: 20,
-        paddingVertical:8
+        paddingVertical: 8
     },
     inputNote: {
         fontSize: 16,
-        paddingVertical:8
-        
+        paddingVertical: 8
+
     },
     moreMenu: {
         position: "absolute",
@@ -200,74 +217,74 @@ const styles = StyleSheet.create({
         bottom: 0,
         backgroundColor: "white",
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)",
-        left:0,
-        right:0,
-        padding:12,
+        left: 0,
+        right: 0,
+        padding: 12,
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
-        paddingBottom:40
+        paddingBottom: 50
     },
     colorOptions: {
         display: "flex",
         flexDirection: "row",
-        justifyContent:"space-between",
-        paddingTop:6
+        justifyContent: "space-between",
+        paddingTop: 6
     },
     colorWhite: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "white",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorPink:{
+    colorPink: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#F0918A",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorYellow:{
+    colorYellow: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#FBF180",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorGreen:{
+    colorGreen: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#CEFB98",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorMint:{
+    colorMint: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#ABFBEA",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorBlue:{
+    colorBlue: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#CCEEF5",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     },
-    colorLila:{
+    colorLila: {
         width: 25,
         height: 25,
         borderRadius: "100%",
         backgroundColor: "#D7B2F9",
-        borderWidth:1,
-        borderColor:"black"
+        borderWidth: 1,
+        borderColor: "black"
     }
 
 
