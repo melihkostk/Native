@@ -13,19 +13,20 @@ const { height } = Dimensions.get('window');
 export default function Index() {
 
   const {
-  notes,
-  setNotes,
-  deletedNotes,
-  setDeletedNotes,
-  archivedNotes,
-  setArchivedNotes
-} = useNotes();
+    notes,
+    setNotes,
+    deletedNotes,
+    setDeletedNotes,
+    archivedNotes,
+    setArchivedNotes
+  } = useNotes();
 
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [sidebarShown, setSiderbarShown] = React.useState(false);
   const [noteInputShown, setNoteInputShown] = React.useState(false);
-
+  const [searchInput, setSearchInput] = React.useState("");
+  console.log(searchInput)
   const [color, setColor] = React.useState("white");
 
   return (
@@ -38,7 +39,7 @@ export default function Index() {
             <Pressable onPress={() => setSiderbarShown(prev => !prev)}>
               <Image source={require("../../assets/images/menu-icon.png")}></Image>
             </Pressable>
-            <TextInput style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
+            <TextInput value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
           </View>
           <View style={styles.noteInputRight}>
             <Image source={require("../../assets/images/grid.png")}></Image>
@@ -53,22 +54,29 @@ export default function Index() {
         </View>}
         <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
           <View style={styles.notesContainer}>
-            {notes.map((item, index) => (
-              <Note
-                title={item.title}
-                description={item.description}
-                setNotes={setNotes}
-                notes={notes}
-                key={item.id}
-                id={item.id}
-                color={item.color}
-                setDeletedNotes={setDeletedNotes}
-                deletedNotes={deletedNotes}
-                archivedNotes={archivedNotes}
-                setArchivedNotes={archivedNotes}
-                setNoteInputShown={setNoteInputShown}
-              />
-            ))}
+            {notes
+              .filter((item) => {
+                return (
+                  item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+                  item.description.toLowerCase().includes(searchInput.toLowerCase())
+                );
+              })
+              .map((item) => (
+                <Note
+                  key={item.id}
+                  title={item.title}
+                  description={item.description}
+                  setNotes={setNotes}
+                  notes={notes}
+                  id={item.id}
+                  color={item.color}
+                  setDeletedNotes={setDeletedNotes}
+                  deletedNotes={deletedNotes}
+                  archivedNotes={archivedNotes}
+                  setArchivedNotes={setArchivedNotes}
+                  setNoteInputShown={setNoteInputShown}
+                />
+              ))}
           </View>
         </ScrollView>
       </View>
