@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/header";
 import Note from "../components/note";
 import Sidebar from "../components/sidebar";
@@ -8,7 +8,7 @@ const { height } = Dimensions.get('window');
 
 export default function Deleted() {
 
-    const { deletedNotes } = useNotes();
+    const { deletedNotes , setDeletedNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
 
@@ -19,7 +19,9 @@ export default function Deleted() {
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
-                    <Text style={styles.deleteAll}>Çöp Kutusunu Boşalt</Text>
+                    <Pressable onPress={() => setDeletedNotes([])}>
+                        <Text style={styles.deleteAll}>Çöp Kutusunu Boşalt</Text>
+                    </Pressable>
                 </View>
                 {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
                     <Image source={require("../../assets/images/delete.png")}></Image>
