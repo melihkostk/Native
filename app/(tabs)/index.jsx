@@ -27,6 +27,17 @@ export default function Index() {
   const [noteInputShown, setNoteInputShown] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState("");
   const [color, setColor] = React.useState("white");
+  const [deletedShown, setDeletedShown] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!deletedShown) return;
+
+    const timer = setTimeout(() => {
+      setDeletedShown(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [deletedShown]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -74,10 +85,14 @@ export default function Index() {
                   archivedNotes={archivedNotes}
                   setArchivedNotes={setArchivedNotes}
                   setNoteInputShown={setNoteInputShown}
+                  setDeletedShown={setDeletedShown}
                 />
               ))}
           </View>
         </ScrollView>
+        {deletedShown && <View style={styles.deletedInfo}>
+          <Text style={styles.deletedInfoText}>Not çöp kutusuna taşındı</Text>
+        </View>}
       </View>
       <Footer setNoteInputShown={setNoteInputShown} />
     </SafeAreaView>
@@ -161,6 +176,19 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center"
+  },
+  deletedInfo: {
+    position: "absolute",
+    bottom: 100,
+    width: "95%",
+    backgroundColor: "#212121",
+    padding: 10,
+    borderRadius: 6
+  },
+  deletedInfoText: {
+    color: "white",
+    fontWeight: "500",
+    fontSize: 13
   }
 })
 

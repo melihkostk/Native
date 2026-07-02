@@ -26,6 +26,7 @@ export default function Note(props) {
         const remaining = props.notes.filter(note => note.id !== id)
         props.setNotes(remaining)
         props.setDeletedNotes(prev => [...prev, deleted])
+        props.setDeletedShown(prev => !prev)
     }
 
     function archiveNote(id) {
