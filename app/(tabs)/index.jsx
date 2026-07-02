@@ -1,0 +1,164 @@
+import React from "react";
+import { Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import 'react-native-gesture-handler';
+import Footer from "../components/footer";
+import Note from "../components/note";
+import NoteInput from "../components/noteInput";
+import Sidebar from "../components/sidebar";
+
+const { height } = Dimensions.get('window');
+
+export default function Index() {
+
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [sidebarShown, setSiderbarShown] = React.useState(false);
+  const [noteInputShown, setNoteInputShown] = React.useState(false);
+  const [notes, setNotes] = React.useState([]);
+  const [deletedNotes, setDeletedNotes] = React.useState([]);
+  const [color, setColor] = React.useState("white");
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      {noteInputShown && <NoteInput color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
+      <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
+      <View style={styles.container}>
+        <View style={styles.noteInput}>
+          <View style={styles.noteInputLeft}>
+            <Pressable onPress={() => setSiderbarShown(prev => !prev)}>
+              <Image source={require("../../assets/images/menu-icon.png")}></Image>
+            </Pressable>
+            <TextInput style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
+          </View>
+          <View style={styles.noteInputRight}>
+            <Image source={require("../../assets/images/grid.png")}></Image>
+            <View style={styles.profile}>
+              <Text style={styles.profileText}>M</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.deletedInfo}>
+          <Text style={styles.deletedInfoText}>Not silindi</Text>
+        </View>
+        {notes && notes.length === 0 && <View style={styles.infoContainer}>
+          <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
+          <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
+        </View>}
+        <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
+          <View style={styles.notesContainer}>
+            {notes.map((item, index) => (
+              <Note
+                title={item.title}
+                description={item.description}
+                setNotes={setNotes}
+                notes={notes}
+                key={item.id}
+                id={item.id}
+                color={item.color}
+                setDeletedNotes={setDeletedNotes}
+                deletedNotes={deletedNotes}
+                setNoteInputShown={setNoteInputShown}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+      <Footer setNoteInputShown={setNoteInputShown} />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flex: 1
+  },
+  title: {
+    fontSize: 18,
+    color: "#5F6368",
+    textAlign: "center",
+  },
+  infoContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: height * 0.1
+  },
+  image: {
+    margin: 20
+  },
+  noteInput: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
+    width: "95%",
+    borderRadius: 8,
+    marginTop: 12,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  noteInputLeft: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8
+  },
+  noteInputRight: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8
+  },
+  noteInputText: {
+    color: "#202124",
+    fontSize: 15,
+  },
+  profile: {
+    backgroundColor: "#43a0a8",
+    width: 30,
+    height: 30,
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  profileText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center"
+  },
+  scrollContainer: {
+    width: "100%",
+  },
+  notesContainer: {
+    display: "flex",
+    width: "100%",
+    gap: 8,
+    marginTop: 8,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  deletedInfo: {
+    width: "95%",
+    backgroundColor: "#323232",
+    padding: 6,
+    borderRadius:6,
+    position:"absolute",
+    bottom:50,
+  },
+  deletedInfoText: {
+    color: "white",
+    fontWeight:"600"
+  }
+
+})
+
+
