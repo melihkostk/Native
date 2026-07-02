@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function Settings() {
@@ -5,7 +6,9 @@ export default function Settings() {
         <SafeAreaView>
             <View style={styles.container}>
                 <View style={styles.settingsHeader}>
-                    <Image source={require("../../assets/images/close.png")}></Image>
+                    <Link href={"/"}>
+                        <Image source={require("../../assets/images/close.png")}></Image>
+                    </Link>
                     <Text style={styles.pageTitle}>Ayarlar</Text>
                 </View>
                 <View style={styles.sections}>
@@ -70,8 +73,8 @@ const styles = StyleSheet.create({
     pageTitle: {
         color: "#333333",
         fontSize: 18,
-        marginLeft:"auto",
-        marginRight:"auto"
+        marginLeft: "auto",
+        marginRight: "auto"
     },
     text: {
         color: "#202124",
@@ -80,13 +83,13 @@ const styles = StyleSheet.create({
     },
     version: {
         fontSize: 13,
-        color:"#808080"
+        color: "#808080"
     },
     settingsHeader: {
         display: "flex",
         flexDirection: "row",
-        justifyContent:"flex-start",
-        paddingBottom:10,
+        justifyContent: "flex-start",
+        paddingBottom: 10,
     },
     key: {
         backgroundColor: "#1A73E8",
@@ -117,6 +120,6 @@ const styles = StyleSheet.create({
         height: 20
     },
     sections: {
-        paddingVertical:10
+        paddingVertical: 10
     }
 })

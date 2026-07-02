@@ -6,16 +6,24 @@ import Note from "../components/note";
 import NoteInput from "../components/noteInput";
 import Sidebar from "../components/sidebar";
 
+import { useNotes } from "../context/NotesContext";
+
 const { height } = Dimensions.get('window');
 
 export default function Index() {
+
+  const {
+  notes,
+  setNotes,
+  deletedNotes,
+  setDeletedNotes,
+} = useNotes();
 
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [sidebarShown, setSiderbarShown] = React.useState(false);
   const [noteInputShown, setNoteInputShown] = React.useState(false);
-  const [notes, setNotes] = React.useState([]);
-  const [deletedNotes, setDeletedNotes] = React.useState([]);
+
   const [color, setColor] = React.useState("white");
 
   return (
@@ -150,13 +158,13 @@ const styles = StyleSheet.create({
     width: "95%",
     backgroundColor: "#323232",
     padding: 6,
-    borderRadius:6,
-    position:"absolute",
-    bottom:50,
+    borderRadius: 6,
+    position: "absolute",
+    bottom: 50,
   },
   deletedInfoText: {
     color: "white",
-    fontWeight:"600"
+    fontWeight: "600"
   }
 
 })
