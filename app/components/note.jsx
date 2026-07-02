@@ -1,6 +1,25 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useRef } from "react";
+import { PanResponder, StyleSheet, Text, View } from "react-native";
 
 export default function Note(props) {
+
+    const panResponder = useRef(
+        PanResponder.create({
+
+            onStartShouldSetPanResponder: (evt, gestureState) => true,
+            onMoveShouldSetPanResponder: (evt, gestureState) => true,
+
+            onPanResponderMove: (_, gestureState) => {},
+            onPanResponderRelease: (_, gestureState) => {
+                if (gestureState.dx < -50) {
+                    deleteNote(props.id);
+                } 
+                else if (gestureState.dx > 50) {
+                    archiveNote(props.id);
+                }
+            },
+        }),
+    ).current;
 
     function deleteNote(id) {
         const deleted = props.notes.find(note => note.id === id)
@@ -18,12 +37,12 @@ export default function Note(props) {
     }
 
     return (
-        <Pressable style={[styles.note, { backgroundColor: props.color }]} onPress={() => deleteNote(props.id)}>
+        <View {...panResponder.panHandlers} style={[styles.note, { backgroundColor: props.color }]}>
             <View>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.desciption}>{props.description}</Text>
             </View>
-        </Pressable>
+        </View>
     )
 }
 

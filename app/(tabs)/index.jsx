@@ -26,7 +26,6 @@ export default function Index() {
   const [sidebarShown, setSiderbarShown] = React.useState(false);
   const [noteInputShown, setNoteInputShown] = React.useState(false);
   const [searchInput, setSearchInput] = React.useState("");
-  console.log(searchInput)
   const [color, setColor] = React.useState("white");
 
   return (
