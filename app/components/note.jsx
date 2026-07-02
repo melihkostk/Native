@@ -9,8 +9,16 @@ export default function Note(props) {
         props.setDeletedNotes(prev => [...prev, deleted])
     }
 
+    function archiveNote(id) {
+        const archived = props.notes.find(note => note.id === id)
+        const remaining = props.notes.filter(note => note.id !== id)
+        props.setNotes(remaining);
+        props.setArchivedNotes(prev => [...prev, archived])
+
+    }
+
     return (
-        <Pressable style={[styles.note , {backgroundColor:props.color}]} onPress={() => deleteNote(props.id)}>
+        <Pressable style={[styles.note, { backgroundColor: props.color }]} onPress={() => deleteNote(props.id)}>
             <View>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.desciption}>{props.description}</Text>

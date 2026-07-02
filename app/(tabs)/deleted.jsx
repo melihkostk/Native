@@ -20,7 +20,7 @@ export default function Deleted() {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
                     <Pressable onPress={() => setDeletedNotes([])}>
-                        <Text style={styles.deleteAll}>Çöp Kutusunu Boşalt</Text>
+                        <Text style={[styles.deleteAll , deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
                     </Pressable>
                 </View>
                 {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
@@ -73,6 +73,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 600,
         color: "#cdcdcd"
+    },
+    activeDeleteAll:{
+        fontSize: 14,
+        fontWeight: 600,
+        color: "#1A73E8"
     },
     scrollContainer: {
         width: "100%",

@@ -17,6 +17,8 @@ export default function Index() {
   setNotes,
   deletedNotes,
   setDeletedNotes,
+  archivedNotes,
+  setArchivedNotes
 } = useNotes();
 
   const [title, setTitle] = React.useState("");
@@ -45,9 +47,6 @@ export default function Index() {
             </View>
           </View>
         </View>
-        <View style={styles.deletedInfo}>
-          <Text style={styles.deletedInfoText}>Not silindi</Text>
-        </View>
         {notes && notes.length === 0 && <View style={styles.infoContainer}>
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
           <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
@@ -65,6 +64,8 @@ export default function Index() {
                 color={item.color}
                 setDeletedNotes={setDeletedNotes}
                 deletedNotes={deletedNotes}
+                archivedNotes={archivedNotes}
+                setArchivedNotes={archivedNotes}
                 setNoteInputShown={setNoteInputShown}
               />
             ))}
@@ -153,20 +154,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center"
-  },
-  deletedInfo: {
-    width: "95%",
-    backgroundColor: "#323232",
-    padding: 6,
-    borderRadius: 6,
-    position: "absolute",
-    bottom: 50,
-  },
-  deletedInfoText: {
-    color: "white",
-    fontWeight: "600"
   }
-
 })
 
 
