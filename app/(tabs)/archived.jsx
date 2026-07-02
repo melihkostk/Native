@@ -8,7 +8,7 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
-    const { archivedNotes, setArchivedNotes } = useNotes();
+    const { archivedNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
 
@@ -50,5 +50,16 @@ const styles = StyleSheet.create({
     },
     infoImage: {
         margin: 20
-    }
+    },
+    scrollContainer: {
+        width: "100%",
+    },
+    notesContainer: {
+        display: "flex",
+        width: "100%",
+        gap: 8,
+        marginTop: 8,
+        alignItems: "center",
+        justifyContent: "center"
+    },
 })
