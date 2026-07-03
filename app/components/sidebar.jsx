@@ -13,7 +13,6 @@ export default function Sidebar(props) {
 
             onPanResponderMove: (_, gestureState) => { },
             onPanResponderRelease: (_, gestureState) => {
-                console.log(gestureState.dx)
                 if (gestureState.dx < -50) {
                     props.setSiderbarShown(prev => !prev)
                 }

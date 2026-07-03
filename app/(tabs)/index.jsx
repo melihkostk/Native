@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 8
+    gap: 8,
+    flex:1
   },
   noteInputRight: {
     display: "flex",
@@ -166,6 +167,8 @@ const styles = StyleSheet.create({
   noteInputText: {
     color: "#202124",
     fontSize: 15,
+    width:"100%",
+    paddingRight:40
   },
   profile: {
     backgroundColor: "#43a0a8",
