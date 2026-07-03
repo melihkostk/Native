@@ -13,7 +13,7 @@ export default function Deleted() {
     const [deleteWarning, setDeleteWarning] = React.useState(false)
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         width: "100%",
+        flex:"1",
+        height:"100%"
     },
     notesContainer: {
         display: "flex",
@@ -104,7 +106,9 @@ const styles = StyleSheet.create({
         gap: 8,
         marginTop: 8,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        flex:"1",
+        paddingBottom:40
     },
     titleContainer: {
         display: "flex",

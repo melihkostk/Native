@@ -9,11 +9,11 @@ export default function Note(props) {
             onStartShouldSetPanResponder: (evt, gestureState) => true,
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
 
-            onPanResponderMove: (_, gestureState) => {},
+            onPanResponderMove: (_, gestureState) => { },
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -50) {
                     deleteNote(props.id);
-                } 
+                }
                 else if (gestureState.dx > 50) {
                     archiveNote(props.id);
                 }

@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 8,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    paddingBottom:30
   },
   deletedInfo: {
     position: "absolute",
