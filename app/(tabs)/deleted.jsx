@@ -8,9 +8,9 @@ const { height } = Dimensions.get('window');
 
 export default function Deleted() {
 
-    const { deletedNotes , setDeletedNotes } = useNotes();
-
+    const { deletedNotes, setDeletedNotes } = useNotes();
     const [sidebarShown, setSiderbarShown] = React.useState(false)
+    const [deleteWarning, setDeleteWarning] = React.useState(false)
 
     return (
         <SafeAreaView>
@@ -19,13 +19,29 @@ export default function Deleted() {
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
-                    <Pressable onPress={() => setDeletedNotes([])}>
-                        <Text style={[styles.deleteAll , deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
+                    <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
+                        <Text style={[styles.deleteAll, deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
                     </Pressable>
                 </View>
                 {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
                     <Image source={require("../../assets/images/delete.png")}></Image>
                     <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
+                </View>}
+                {deleteWarning && <View style={styles.deleteWarningContainer}>
+                    <View>
+                        <Text style={styles.warningTitle}>Çöp Kutusu boşaltılsın mı ? </Text>
+                    </View>
+                    <View>
+                        <Text style={styles.warningMessage}>Çöp Kutusu`ndaki tüm notlar kalısı olarak silinecektir.</Text>
+                    </View>
+                    <View style={styles.deleteButtonsContainer}>
+                        <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
+                            <Text style={styles.deleteButtons}>İptal</Text>
+                        </Pressable>
+                        <Pressable onPress={() => { setDeletedNotes([]); setDeleteWarning(prev => !prev) }}>
+                            <Text style={styles.deleteButtons}>Çöp Kutusu`nu boşalt</Text>
+                        </Pressable>
+                    </View>
                 </View>}
                 <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
                     <View style={styles.notesContainer}>
@@ -74,7 +90,7 @@ const styles = StyleSheet.create({
         fontWeight: 600,
         color: "#cdcdcd"
     },
-    activeDeleteAll:{
+    activeDeleteAll: {
         fontSize: 14,
         fontWeight: 600,
         color: "#1A73E8"
@@ -93,5 +109,33 @@ const styles = StyleSheet.create({
     titleContainer: {
         display: "flex",
         alignItems: "flex-end"
+    },
+    deleteWarningContainer: {
+        backgroundColor: "white",
+        width: "95%",
+        padding: 15,
+        borderRadius: 8,
+        position: "absolute",
+        zIndex: 50,
+        borderWidth: 1,
+        borderColor: "black",
+        top: "50%",
+        
+    },
+    warningTitle: {
+        fontWeight: "600"
+    },
+    warningMessage:{
+        paddingVertical:20
+    },
+    deleteButtonsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end"
+    },
+    deleteButtons: {
+        color: "#1A73E8",
+        fontWeight: "600",
+        padding: 8
     }
 })
