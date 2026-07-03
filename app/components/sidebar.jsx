@@ -1,11 +1,28 @@
 import { Link } from "expo-router";
-import { Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { useRef } from "react";
+import { Dimensions, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 const { height } = Dimensions.get('window');
 
 export default function Sidebar(props) {
+
+    const panResponder = useRef(
+        PanResponder.create({
+
+            onStartShouldSetPanResponder: (evt, gestureState) => true,
+            onMoveShouldSetPanResponder: (evt, gestureState) => true,
+
+            onPanResponderMove: (_, gestureState) => { },
+            onPanResponderRelease: (_, gestureState) => {
+                console.log(gestureState.dx)
+                if (gestureState.dx < -50) {
+                    props.setSiderbarShown(prev => !prev)
+                }
+            },
+        }),
+    ).current;
     return (
         props.sidebarShown && (
-            <SafeAreaView style={styles.sidebarComponent}>
+            <SafeAreaView {...panResponder.panHandlers} style={styles.sidebarComponent}>
                 <View style={styles.firstSection}>
                     <Image style={styles.icon} source={require("../../assets/images/google.png")}></Image>
                     <Text style={styles.title}>Keep</Text>

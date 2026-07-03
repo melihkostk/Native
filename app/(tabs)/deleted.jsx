@@ -27,12 +27,12 @@ export default function Deleted() {
                     <Image source={require("../../assets/images/delete.png")}></Image>
                     <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
                 </View>}
-                {deleteWarning && <View style={styles.deleteWarningContainer}>
+                {deleteWarning || deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
                     <View>
                         <Text style={styles.warningTitle}>Çöp Kutusu boşaltılsın mı ? </Text>
                     </View>
                     <View>
-                        <Text style={styles.warningMessage}>Çöp Kutusu`ndaki tüm notlar kalısı olarak silinecektir.</Text>
+                        <Text style={styles.warningMessage}>Çöp Kutusundaki tüm notlar kalısı olarak silinecektir.</Text>
                     </View>
                     <View style={styles.deleteButtonsContainer}>
                         <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
@@ -121,9 +121,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         position: "absolute",
         zIndex: 50,
-        borderWidth: 1,
-        borderColor: "black",
-        top: "50%",
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)",
+        top: "30%",
         
     },
     warningTitle: {

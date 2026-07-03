@@ -35,7 +35,6 @@ export default function Note(props) {
         props.setNotes(remaining);
         props.setArchivedNotes(prev => [...prev, archived])
         props.setArchiveShown(prev => !prev)
-
     }
 
     return (

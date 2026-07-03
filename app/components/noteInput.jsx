@@ -61,7 +61,7 @@ export default function NoteInput(props) {
                 </View>
             </View>
             <View style={styles.inputArea}>
-                <TextInput value={props.title} onChangeText={props.setTitle} style={styles.inputTitle} placeholder="Başlık"></TextInput>
+                <TextInput autoFocus={true} value={props.title} onChangeText={props.setTitle} style={styles.inputTitle} placeholder="Başlık"></TextInput>
                 <TextInput value={props.description} onChangeText={props.setDescription} style={styles.inputNote} placeholder="Not"></TextInput>
             </View>
             <View style={styles.noteInputFooter}>
