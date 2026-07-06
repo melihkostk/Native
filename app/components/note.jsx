@@ -17,12 +17,16 @@ export default function Note(props) {
                 { useNativeDriver: false }
             ),
             onPanResponderRelease: (_, gestureState) => {
-                if (gestureState.dx < -50) {
+                if (gestureState.dx < -150) {
                     deleteNote(props.id);
                 }
-                else if (gestureState.dx > 50) {
+                else if (gestureState.dx > 150) {
                     archiveNote(props.id);
                 }
+                Animated.spring(pan, {
+                    toValue: { x: 0, y: 0 },
+                    useNativeDriver: false,
+                }).start();
             },
         }),
     ).current;

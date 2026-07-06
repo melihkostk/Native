@@ -1,9 +1,13 @@
 import { Link } from "expo-router";
 import { useRef } from "react";
-import { Dimensions, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 const { height } = Dimensions.get('window');
 
 export default function Sidebar(props) {
+
+    const pan = useRef(new Animated.ValueXY()).current;
+    const AnimatedSafeAreaView =
+        Animated.createAnimatedComponent(SafeAreaView);
 
     const panResponder = useRef(
         PanResponder.create({
@@ -11,7 +15,11 @@ export default function Sidebar(props) {
             onStartShouldSetPanResponder: (evt, gestureState) => true,
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
 
-            onPanResponderMove: (_, gestureState) => { },
+            onPanResponderMove: Animated.event(
+                [null, { dx: pan.x, dy: pan.y }],
+                { useNativeDriver: false }
+            ),
+
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -50) {
                     props.setSiderbarShown(prev => !prev)
@@ -21,7 +29,11 @@ export default function Sidebar(props) {
     ).current;
     return (
         props.sidebarShown && (
-            <SafeAreaView {...panResponder.panHandlers} style={styles.sidebarComponent}>
+            <AnimatedSafeAreaView {...panResponder.panHandlers} style={[styles.sidebarComponent, {
+                transform: [
+                    { translateX: pan.x },
+                ],
+            }]}>
                 <View style={styles.firstSection}>
                     <Image style={styles.icon} source={require("../../assets/images/google.png")}></Image>
                     <Text style={styles.title}>Keep</Text>
@@ -50,7 +62,7 @@ export default function Sidebar(props) {
                         <Link style={styles.links} href={"/"}>Yardım</Link>
                     </Pressable>
                 </View>
-            </SafeAreaView>)
+            </AnimatedSafeAreaView>)
     )
 }
 
