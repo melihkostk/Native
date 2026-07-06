@@ -35,6 +35,7 @@ export default function Archived() {
                             description={item.description}
                             color={item.color}
                             restoreArchive={restoreArchive}
+                            page="archived"
                         />
                     ))}
                 </View>

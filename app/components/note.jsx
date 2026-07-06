@@ -17,12 +17,34 @@ export default function Note(props) {
                 { useNativeDriver: false }
             ),
             onPanResponderRelease: (_, gestureState) => {
-                if (gestureState.dx < -150) {
-                    props.deleteNote(props.id);
+
+                if (props.page === "home") {
+                    if (gestureState.dx < -150) {
+                        props.deleteNote(props.id);
+                    }
+                    else if (gestureState.dx > 150) {
+                        props.archiveNote(props.id);
+                    }
                 }
-                else if (gestureState.dx > 150) {
-                    props.archiveNote(props.id);
+
+                if (props.page === "deleted") {
+                    if (gestureState.dx < -150) {
+                        props.deletePerma(props.id);
+                    }
+                    else if (gestureState.dx > 150) {
+                        props.restoreThrash(props.id);
+                    }
                 }
+
+                if (props.page === "archived") {
+                    if (gestureState.dx < -150) {
+                        props.deleteNote(props.id);
+                    }
+                    else if (gestureState.dx > 150) {
+                        props.archiveNote(props.id);
+                    }
+                }
+
                 Animated.spring(pan, {
                     toValue: { x: 0, y: 0 },
                     useNativeDriver: false,

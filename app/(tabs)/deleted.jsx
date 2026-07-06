@@ -8,13 +8,21 @@ const { height } = Dimensions.get('window');
 
 export default function Deleted() {
 
-    const { deletedNotes, setDeletedNotes } = useNotes();
+    const { deletedNotes, setDeletedNotes , setNotes } = useNotes();
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
 
     function deletePerma(id) {
         const remaining = deletedNotes.filter(note => note.id !== id);
         setDeletedNotes(remaining)
+    }
+
+    function restoreThrash(id) {
+        const restored = deletedNotes.find(note => note.id === id);
+        const remaining = deletedNotes.filter(note => note.id !== id);
+        setDeletedNotes(remaining);
+        setNotes(prev => [...prev , restored]);
+
     }
 
     return (
@@ -60,6 +68,8 @@ export default function Deleted() {
                                 setDeletedNotes={setDeletedNotes}
                                 deletedNotes={deletedNotes}
                                 deletePerma={deletePerma}
+                                restoreThrash={restoreThrash}
+                                page="deleted"
                             />
                         ))}
                     </View>

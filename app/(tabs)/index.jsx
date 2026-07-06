@@ -116,6 +116,7 @@ export default function Index() {
                   setArchiveShown={setArchiveShown}
                   archiveNote={archiveNote}
                   deleteNote={deleteNote}
+                  page="home"
                 />
               ))}
           </View>

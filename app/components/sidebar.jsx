@@ -15,6 +15,9 @@ export default function Sidebar(props) {
             onStartShouldSetPanResponder: (evt, gestureState) => true,
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
 
+            onPanResponderGrant: (evt, gestureState) => {
+            },
+
             onPanResponderMove: Animated.event(
                 [null, { dx: pan.x, dy: pan.y }],
                 { useNativeDriver: false }
@@ -23,6 +26,13 @@ export default function Sidebar(props) {
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -50) {
                     props.setSiderbarShown(prev => !prev)
+
+                    Animated.spring(pan, {
+                        toValue: { x: 0, y: 0 },
+                        useNativeDriver: false,
+                    }).start();
+
+                    return;
                 }
 
                 Animated.spring(pan, {
