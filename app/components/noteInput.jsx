@@ -1,9 +1,13 @@
 import React from "react";
-import { Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function NoteInput(props) {
     const [moreShown, setMoreShown] = React.useState(false);
     const [colorShown, setColorShown] = React.useState(false);
+
+    const pan = React.useRef(new Animated.ValueXY()).current;
+    const AnimatedSafeAreaView =
+        Animated.createAnimatedComponent(SafeAreaView);
 
     const panResponder = React.useRef(
         PanResponder.create({
@@ -11,13 +15,20 @@ export default function NoteInput(props) {
             onStartShouldSetPanResponder: (evt, gestureState) => true,
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
 
-            onPanResponderMove: (_, gestureState) => { },
+            onPanResponderMove: Animated.event(
+                [null, { dx: pan.x, dy: pan.y }],
+                { useNativeDriver: false }
+            ),
             onPanResponderRelease: (_, gestureState) => {
-                
+
                 if (gestureState.dy > 30) {
                     setColorShown(false)
                     setMoreShown(false)
                 }
+                Animated.spring(pan, {
+                    toValue: { x: 0, y: 0 },
+                    useNativeDriver: false,
+                }).start();
             },
         }),
     ).current;
@@ -79,7 +90,11 @@ export default function NoteInput(props) {
                         <Image source={require("../../assets/images/more.png")}></Image>
                     </Pressable>
                 </View>
-                {colorShown && <View {...panResponder.panHandlers} style={styles.colorMenu}>
+                {colorShown && <AnimatedSafeAreaView {...panResponder.panHandlers} style={[styles.colorMenu, {
+                    transform: [
+                        { translateY: pan.y }
+                    ]
+                }]}>
                     <Text>
                         Renk
                     </Text>
@@ -106,8 +121,12 @@ export default function NoteInput(props) {
                             <View style={styles.colorLila}></View>
                         </Pressable>
                     </View>
-                </View>}
-                {moreShown && <View {...panResponder.panHandlers} style={styles.moreMenu}>
+                </AnimatedSafeAreaView>}
+                {moreShown && <AnimatedSafeAreaView {...panResponder.panHandlers} style={[styles.moreMenu, {
+                    transform: [
+                        { translateY: pan.y }
+                    ]
+                }]}>
                     <View style={styles.moreOptions}>
                         <Image source={require("../../assets/images/small-delete.png")}></Image>
                         <Text>Sil</Text>
@@ -132,7 +151,7 @@ export default function NoteInput(props) {
                         <Image source={require("../../assets/images/feedback.png")}></Image>
                         <Text>Uygulama içi geri bildirim gönder</Text>
                     </View>
-                </View>}
+                </AnimatedSafeAreaView>}
             </View>
         </SafeAreaView>
     )
