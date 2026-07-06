@@ -12,10 +12,12 @@ export default function Deleted() {
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
     const [savedInfo, setSavedInfo] = React.useState(false)
+    const [deletedInfo , setDeletedInfo] = React.useState(false)
 
     function deletePerma(id) {
         const remaining = deletedNotes.filter(note => note.id !== id);
         setDeletedNotes(remaining)
+        setDeletedInfo(prev => !prev)
     }
 
     function restoreThrash(id) {
@@ -35,6 +37,14 @@ export default function Deleted() {
 
         return () => clearTimeout(timer);
     }, [savedInfo]);
+
+    React.useEffect(() => {
+        if(!deletedInfo) return;
+        const timer = setTimeout(() => {
+            setDeletedInfo(prev => !prev)
+        })
+        return () => clearTimeout(timer)
+    },[deletedInfo])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -87,6 +97,9 @@ export default function Deleted() {
                 </ScrollView>
                 {savedInfo && <View style={styles.deletedInfo}>
                     <Text style={styles.deletedInfoText}>Not geri yüklendi</Text>
+                </View>}
+                {deletedInfo && <View style={styles.deletedInfo}>
+                    <Text style={styles.deletedInfoText}>Not kalıcı olarak silindi</Text>
                 </View>}
             </View>
         </SafeAreaView>
