@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Animated, PanResponder, StyleSheet, Text, View } from "react-native";
+import { Animated, PanResponder, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Note(props) {
 
@@ -18,10 +18,10 @@ export default function Note(props) {
             ),
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -150) {
-                    deleteNote(props.id);
+                    props.deleteNote(props.id);
                 }
                 else if (gestureState.dx > 150) {
-                    archiveNote(props.id);
+                    props.archiveNote(props.id);
                 }
                 Animated.spring(pan, {
                     toValue: { x: 0, y: 0 },
@@ -31,40 +31,27 @@ export default function Note(props) {
         }),
     ).current;
 
-    function deleteNote(id) {
-        const deleted = props.notes.find(note => note.id === id)
-        const remaining = props.notes.filter(note => note.id !== id)
-        props.setNotes(remaining)
-        props.setDeletedNotes(prev => [...prev, deleted])
-        props.setDeletedShown(prev => !prev)
-    }
-
-    function archiveNote(id) {
-        const archived = props.notes.find(note => note.id === id)
-        const remaining = props.notes.filter(note => note.id !== id)
-        props.setNotes(remaining);
-        props.setArchivedNotes(prev => [...prev, archived])
-        props.setArchiveShown(prev => !prev)
-    }
-
     return (
-        <Animated.View
-            {...panResponder.panHandlers}
-            style={[
-                styles.note,
-                {
-                    backgroundColor: props.color,
-                    transform: [
-                        { translateX: pan.x },
-                    ],
-                },
-            ]}
-        >
-            <View>
-                <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.desciption}>{props.description}</Text>
-            </View>
-        </Animated.View>
+        <Pressable onPress={() => props.deletePerma(props.id)}>
+            <Animated.View
+                {...panResponder.panHandlers}
+                style={[
+                    styles.note,
+                    {
+                        backgroundColor: props.color,
+                        transform: [
+                            { translateX: pan.x },
+                        ],
+                    },
+                ]}
+            >
+                <View>
+                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.desciption}>{props.description}</Text>
+                </View>
+            </Animated.View>
+        </Pressable>
+
     )
 }
 

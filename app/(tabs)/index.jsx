@@ -50,6 +50,22 @@ export default function Index() {
     return () => clearTimeout(timer)
   }, [archiveShown]);
 
+  function deleteNote(id) {
+    const deleted = notes.find(note => note.id === id)
+    const remaining = notes.filter(note => note.id !== id)
+    setNotes(remaining)
+    setDeletedNotes(prev => [...prev, deleted])
+    setDeletedShown(prev => !prev)
+  }
+
+  function archiveNote(id) {
+    const archived = notes.find(note => note.id === id)
+    const remaining = notes.filter(note => note.id !== id)
+    setNotes(remaining);
+    setArchivedNotes(prev => [...prev, archived])
+    setArchiveShown(prev => !prev)
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {noteInputShown && <NoteInput color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
@@ -98,6 +114,8 @@ export default function Index() {
                   setNoteInputShown={setNoteInputShown}
                   setDeletedShown={setDeletedShown}
                   setArchiveShown={setArchiveShown}
+                  archiveNote={archiveNote}
+                  deleteNote={deleteNote}
                 />
               ))}
           </View>
@@ -156,7 +174,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    flex:1
+    flex: 1
   },
   noteInputRight: {
     display: "flex",
@@ -167,8 +185,8 @@ const styles = StyleSheet.create({
   noteInputText: {
     color: "#202124",
     fontSize: 15,
-    width:"100%",
-    paddingRight:40
+    width: "100%",
+    paddingRight: 40
   },
   profile: {
     backgroundColor: "#43a0a8",
@@ -194,7 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom:30
+    paddingBottom: 30
   },
   deletedInfo: {
     position: "absolute",

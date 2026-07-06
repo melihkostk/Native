@@ -12,6 +12,11 @@ export default function Deleted() {
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
 
+    function deletePerma(id) {
+        const remaining = deletedNotes.filter(note => note.id !== id);
+        setDeletedNotes(remaining)
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" />
@@ -48,9 +53,13 @@ export default function Deleted() {
                         {deletedNotes.map((item) => (
                             <Note
                                 key={item.id}
+                                id={item.id}
                                 title={item.title}
                                 description={item.description}
                                 color={item.color}
+                                setDeletedNotes={setDeletedNotes}
+                                deletedNotes={deletedNotes}
+                                deletePerma={deletePerma}
                             />
                         ))}
                     </View>
@@ -97,8 +106,8 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         width: "100%",
-        flex:"1",
-        height:"100%"
+        flex: "1",
+        height: "100%"
     },
     notesContainer: {
         display: "flex",
@@ -107,8 +116,8 @@ const styles = StyleSheet.create({
         marginTop: 8,
         alignItems: "center",
         justifyContent: "center",
-        flex:"1",
-        paddingBottom:40
+        flex: "1",
+        paddingBottom: 40
     },
     titleContainer: {
         display: "flex",
@@ -123,13 +132,13 @@ const styles = StyleSheet.create({
         zIndex: 50,
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)",
         top: "30%",
-        
+
     },
     warningTitle: {
         fontWeight: "600"
     },
-    warningMessage:{
-        paddingVertical:20
+    warningMessage: {
+        paddingVertical: 20
     },
     deleteButtonsContainer: {
         display: "flex",
