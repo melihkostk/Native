@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Animated, PanResponder, Pressable, StyleSheet, Text, View } from "react-native";
+import { Animated, PanResponder, StyleSheet, Text, View } from "react-native";
 
 export default function Note(props) {
 
@@ -32,25 +32,24 @@ export default function Note(props) {
     ).current;
 
     return (
-        <Pressable onPress={() => props.deletePerma(props.id)}>
-            <Animated.View
-                {...panResponder.panHandlers}
-                style={[
-                    styles.note,
-                    {
-                        backgroundColor: props.color,
-                        transform: [
-                            { translateX: pan.x },
-                        ],
-                    },
-                ]}
-            >
-                <View>
-                    <Text style={styles.title}>{props.title}</Text>
-                    <Text style={styles.desciption}>{props.description}</Text>
-                </View>
-            </Animated.View>
-        </Pressable>
+        <Animated.View
+            {...panResponder.panHandlers}
+            style={[
+                styles.note,
+                {
+                    backgroundColor: props.color,
+                    transform: [
+                        { translateX: pan.x },
+                    ],
+                },
+            ]}
+        >
+            <View>
+                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.desciption}>{props.description}</Text>
+            </View>
+
+        </Animated.View>
 
     )
 }

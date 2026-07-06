@@ -8,9 +8,14 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
-    const { archivedNotes } = useNotes();
+    const { archivedNotes , setArchivedNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
+
+    function restoreArchive(id){
+        const remaining = archivedNotes.filter(note => note.id !== id);
+        setArchivedNotes(remaining);
+    }
 
     return (
         <SafeAreaView>
@@ -24,10 +29,12 @@ export default function Archived() {
                 <View style={styles.notesContainer}>
                     {archivedNotes.map((item) => (
                         <Note
+                            id={item.id}
                             key={item.id}
                             title={item.title}
                             description={item.description}
                             color={item.color}
+                            restoreArchive={restoreArchive}
                         />
                     ))}
                 </View>
