@@ -38,10 +38,7 @@ export default function Note(props) {
 
                 if (props.page === "archived") {
                     if (gestureState.dx < -150) {
-                        props.deleteNote(props.id);
-                    }
-                    else if (gestureState.dx > 150) {
-                        props.archiveNote(props.id);
+                        props.restoreArchive(props.id);
                     }
                 }
 

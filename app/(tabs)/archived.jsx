@@ -8,13 +8,15 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
-    const { archivedNotes , setArchivedNotes } = useNotes();
+    const { archivedNotes , setArchivedNotes , setNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
 
     function restoreArchive(id){
+        const archived = archivedNotes.find(note => note.id === id)
         const remaining = archivedNotes.filter(note => note.id !== id);
-        setArchivedNotes(remaining);
+        setArchivedNotes(remaining)
+        setNotes(prev => [...prev , archived])
     }
 
     return (
