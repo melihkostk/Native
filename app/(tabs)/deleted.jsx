@@ -27,7 +27,7 @@ export default function Deleted() {
                     <Image source={require("../../assets/images/delete.png")}></Image>
                     <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
                 </View>}
-                {deleteWarning || deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
+                {deleteWarning && deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
                     <View>
                         <Text style={styles.warningTitle}>Çöp Kutusu boşaltılsın mı ? </Text>
                     </View>
