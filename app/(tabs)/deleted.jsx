@@ -8,9 +8,10 @@ const { height } = Dimensions.get('window');
 
 export default function Deleted() {
 
-    const { deletedNotes, setDeletedNotes , setNotes } = useNotes();
+    const { deletedNotes, setDeletedNotes, setNotes } = useNotes();
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
+    const [savedInfo, setSavedInfo] = React.useState(false)
 
     function deletePerma(id) {
         const remaining = deletedNotes.filter(note => note.id !== id);
@@ -21,9 +22,19 @@ export default function Deleted() {
         const restored = deletedNotes.find(note => note.id === id);
         const remaining = deletedNotes.filter(note => note.id !== id);
         setDeletedNotes(remaining);
-        setNotes(prev => [...prev , restored]);
-
+        setNotes(prev => [...prev, restored]);
+        setSavedInfo(prev => !prev)
     }
+
+    React.useEffect(() => {
+        if (!savedInfo) return;
+
+        const timer = setTimeout(() => {
+            setSavedInfo(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, [savedInfo]);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -74,6 +85,9 @@ export default function Deleted() {
                         ))}
                     </View>
                 </ScrollView>
+                {savedInfo && <View style={styles.deletedInfo}>
+                    <Text style={styles.deletedInfoText}>Not geri yüklendi</Text>
+                </View>}
             </View>
         </SafeAreaView>
     )
@@ -83,7 +97,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        flex: 1
     },
     infoContainer: {
         display: "flex",
@@ -159,5 +174,18 @@ const styles = StyleSheet.create({
         color: "#1A73E8",
         fontWeight: "600",
         padding: 8
+    },
+    deletedInfo: {
+        position: "absolute",
+        bottom: 10,
+        width: "95%",
+        backgroundColor: "#212121",
+        padding: 10,
+        borderRadius: 6
+    },
+    deletedInfoText: {
+        color: "white",
+        fontWeight: "500",
+        fontSize: 13
     }
 })
