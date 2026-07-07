@@ -25,12 +25,14 @@ export default function Sidebar(props) {
 
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -50) {
-                    props.setSiderbarShown(prev => !prev)
-
-                    Animated.spring(pan, {
-                        toValue: { x: 0, y: 0 },
+                    Animated.timing(pan.x, {
+                        toValue: -300, 
+                        duration: 200,
                         useNativeDriver: false,
-                    }).start();
+                    }).start(() => {
+                        props.setSiderbarShown(prev => !prev);
+                        pan.setValue({ x: 0, y: 0 });
+                    });
 
                     return;
                 }

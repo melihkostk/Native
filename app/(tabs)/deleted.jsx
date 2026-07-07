@@ -42,7 +42,7 @@ export default function Deleted() {
         if(!deletedInfo) return;
         const timer = setTimeout(() => {
             setDeletedInfo(prev => !prev)
-        })
+        },3000)
         return () => clearTimeout(timer)
     },[deletedInfo])
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         gap: 8,
         marginTop: 8,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         flex: "1",
         paddingBottom: 40
     },

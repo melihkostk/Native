@@ -22,8 +22,17 @@ export default function NoteInput(props) {
             onPanResponderRelease: (_, gestureState) => {
 
                 if (gestureState.dy > 30) {
-                    setColorShown(false)
-                    setMoreShown(false)
+                    Animated.timing(pan.y, {
+                        toValue: -300,
+                        duration:10,
+                        useNativeDriver: false,
+                    }).start(() => {
+                        setColorShown(false)
+                        setMoreShown(false)
+                        pan.setValue({ x: 0, y: 0 });
+                    });
+
+                    return;
                 }
                 Animated.spring(pan, {
                     toValue: { x: 0, y: 0 },
