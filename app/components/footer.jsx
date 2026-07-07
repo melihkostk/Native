@@ -5,9 +5,6 @@ export default function Footer(props) {
         <View style={styles.footerContainer}>
             <View style={styles.footer}>
                 <View style={styles.footerLinks}>
-                    <Image source={require("../../assets/images/check-box.png")}></Image>
-                </View>
-                <View style={styles.footerLinks}>
                     <Image source={require("../../assets/images/brush.png")}></Image>
                 </View>
                 <View style={styles.footerLinks}>

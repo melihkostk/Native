@@ -43,6 +43,14 @@ export default function TabsLayout() {
             headerShown: false,
           }}
         />
+
+        <Tabs.Screen
+          name="help"
+          options={{
+            title: "Yardım",
+            headerShown: false,
+          }}
+        />
       </Tabs>
     </NotesProvider>
   );

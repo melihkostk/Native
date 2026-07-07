@@ -76,7 +76,7 @@ export default function Sidebar(props) {
                     </Pressable>
                     <Pressable style={styles.linkContainer} onPress={() => props.setSiderbarShown(prev => !prev)}>
                         <Image source={require("../../assets/images/help.png")}></Image>
-                        <Link style={styles.links} href={"/"}>Yardım</Link>
+                        <Link style={styles.links} href={"/help"}>Yardım</Link>
                     </Pressable>
                 </View>
             </AnimatedSafeAreaView>)
