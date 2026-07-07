@@ -8,27 +8,28 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
-    const { archivedNotes , setArchivedNotes , setNotes } = useNotes();
+    const { archivedNotes, setArchivedNotes, setNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
+    const [flexCol, setFlexCol] = React.useState(true);
 
-    function restoreArchive(id){
+    function restoreArchive(id) {
         const archived = archivedNotes.find(note => note.id === id)
         const remaining = archivedNotes.filter(note => note.id !== id);
         setArchivedNotes(remaining)
-        setNotes(prev => [...prev , archived])
+        setNotes(prev => [...prev, archived])
     }
 
     return (
         <SafeAreaView>
-            <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" />
+            <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" setFlexCol={setFlexCol} />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
                 <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>
                 <Text style={styles.infoText}>Arşivlenen notlarınız burada görünür</Text>
             </View>}
-            <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
-                <View style={styles.notesContainer}>
+            <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+                <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
                     {archivedNotes.map((item) => (
                         <Note
                             id={item.id}
@@ -38,6 +39,7 @@ export default function Archived() {
                             color={item.color}
                             restoreArchive={restoreArchive}
                             page="archived"
+                            flexCol={flexCol}
                         />
                     ))}
                 </View>
@@ -71,5 +73,16 @@ const styles = StyleSheet.create({
         marginTop: 8,
         alignItems: "center",
         justifyContent: "center"
+    },
+    rowContainer: {
+        display: "flex",
+        width: "100%",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 8,
+        marginTop: 8,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: 30
     },
 })

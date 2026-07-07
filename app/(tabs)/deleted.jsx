@@ -12,7 +12,8 @@ export default function Deleted() {
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
     const [savedInfo, setSavedInfo] = React.useState(false)
-    const [deletedInfo , setDeletedInfo] = React.useState(false)
+    const [deletedInfo, setDeletedInfo] = React.useState(false)
+    const [flexCol, setFlexCol] = React.useState(true);
 
     function deletePerma(id) {
         const remaining = deletedNotes.filter(note => note.id !== id);
@@ -39,16 +40,16 @@ export default function Deleted() {
     }, [savedInfo]);
 
     React.useEffect(() => {
-        if(!deletedInfo) return;
+        if (!deletedInfo) return;
         const timer = setTimeout(() => {
             setDeletedInfo(prev => !prev)
-        },3000)
+        }, 3000)
         return () => clearTimeout(timer)
-    },[deletedInfo])
+    }, [deletedInfo])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" />
+            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" setFlexCol={setFlexCol} />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
@@ -77,8 +78,8 @@ export default function Deleted() {
                         </Pressable>
                     </View>
                 </View>}
-                <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
-                    <View style={styles.notesContainer}>
+                <ScrollView contentContainerStyle={[styles.notesContainer , !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+                    <View style={[styles.notesContainer , !flexCol && styles.rowContainer]}>
                         {deletedNotes.map((item) => (
                             <Note
                                 key={item.id}
@@ -91,6 +92,7 @@ export default function Deleted() {
                                 deletePerma={deletePerma}
                                 restoreThrash={restoreThrash}
                                 page="deleted"
+                                flexCol={flexCol}
                             />
                         ))}
                     </View>
@@ -156,6 +158,17 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         flex: "1",
         paddingBottom: 40
+    },
+    rowContainer: {
+        display: "flex",
+        width: "100%",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 8,
+        marginTop: 8,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: 30
     },
     titleContainer: {
         display: "flex",

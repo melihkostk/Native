@@ -28,7 +28,8 @@ export default function Index() {
   const [searchInput, setSearchInput] = React.useState("");
   const [color, setColor] = React.useState("white");
   const [deletedShown, setDeletedShown] = React.useState(false);
-  const [archiveShown, setArchiveShown] = React.useState(false)
+  const [archiveShown, setArchiveShown] = React.useState(false);
+  const [flexCol, setFlexCol] = React.useState(true);
 
   React.useEffect(() => {
     if (!deletedShown) return;
@@ -79,7 +80,9 @@ export default function Index() {
             <TextInput value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
           </View>
           <View style={styles.noteInputRight}>
-            <Image source={require("../../assets/images/grid.png")}></Image>
+            <Pressable onPress={() => setFlexCol(prev => !prev)}>
+              <Image source={require("../../assets/images/grid.png")}></Image>
+            </Pressable>
             <View style={styles.profile}>
               <Text style={styles.profileText}>M</Text>
             </View>
@@ -89,8 +92,8 @@ export default function Index() {
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
           <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
         </View>}
-        <ScrollView contentContainerStyle={styles.notesContainer} style={styles.scrollContainer}>
-          <View style={styles.notesContainer}>
+        <ScrollView contentContainerStyle={[styles.notesContainer , !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+          <View style={[styles.notesContainer , !flexCol && styles.rowContainer]}>
             {notes
               .filter((item) => {
                 return (
@@ -116,6 +119,7 @@ export default function Index() {
                   setArchiveShown={setArchiveShown}
                   archiveNote={archiveNote}
                   deleteNote={deleteNote}
+                  flexCol={flexCol}
                   page="home"
                 />
               ))}
@@ -209,6 +213,17 @@ const styles = StyleSheet.create({
   notesContainer: {
     display: "flex",
     width: "100%",
+    gap: 8,
+    marginTop: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 30
+  },
+  rowContainer:{
+    display: "flex",
+    width: "100%",
+    flexDirection:"row",
+    flexWrap:"wrap",
     gap: 8,
     marginTop: 8,
     alignItems: "center",

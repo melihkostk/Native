@@ -86,7 +86,6 @@ export default function NoteInput(props) {
             </View>
             <View style={styles.noteInputFooter}>
                 <View style={styles.footerLeft}>
-                    <Image source={require("../../assets/images/add-box.png")}></Image>
                     <Pressable onPress={() => setColorShown(prev => !prev)}>
                         <Image source={require("../../assets/images/palette.png")}></Image>
                     </Pressable>

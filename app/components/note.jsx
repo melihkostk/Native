@@ -55,6 +55,7 @@ export default function Note(props) {
             {...panResponder.panHandlers}
             style={[
                 styles.note,
+                !props.flexCol && styles.noteRow,
                 {
                     backgroundColor: props.color,
                     transform: [
@@ -81,6 +82,9 @@ const styles = StyleSheet.create({
         paddingBottom: 26,
         borderRadius: 8,
         width: "95%",
+    },
+    noteRow:{
+        width:"45%",
     },
     title: {
         fontWeight: 600,

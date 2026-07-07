@@ -11,9 +11,9 @@ export default function Header(props) {
             <View>
                 <Text style={styles.pageTitle}>{props.title}</Text>
             </View>
-            <View style={styles.headerRight}>
+            <Pressable onPress={() => props.setFlexCol(prev => !prev)} style={styles.headerRight}>
                 <Image source={require("../../assets/images/grid.png")}></Image>
-            </View>
+            </Pressable>
         </View>
     )
 }
