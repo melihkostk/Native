@@ -22,7 +22,7 @@ export default function Archived() {
 
     return (
         <SafeAreaView>
-            <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" setFlexCol={setFlexCol} />
+            <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
                 <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>

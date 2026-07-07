@@ -49,7 +49,7 @@ export default function Deleted() {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" setFlexCol={setFlexCol} />
+            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
