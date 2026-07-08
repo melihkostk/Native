@@ -59,6 +59,7 @@ export default function NoteInput(props) {
         props.setNoteInputShown(false)
         props.setTitle("")
         props.setDescription("")
+        props.setColor("white")
     }
 
     return (

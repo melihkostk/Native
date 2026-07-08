@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Animated, PanResponder, StyleSheet, Text, View } from "react-native";
+import { Animated, PanResponder, Pressable, StyleSheet, Text } from "react-native";
 
 export default function Note(props) {
 
@@ -64,10 +64,10 @@ export default function Note(props) {
                 },
             ]}
         >
-            <View>
+            <Pressable onPress={() => props.setNoteInputShown(prev => !prev)}>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.desciption}>{props.description}</Text>
-            </View>
+            </Pressable>
 
         </Animated.View>
 
