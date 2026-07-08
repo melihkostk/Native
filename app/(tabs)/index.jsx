@@ -54,16 +54,14 @@ export default function Index() {
 
   function deleteNote(id) {
     const deleted = notes.find(note => note.id === id)
-    const remaining = notes.filter(note => note.id !== id)
-    setNotes(remaining)
+    setNotes(prev => prev.filter(note => note.id !== id));
     setDeletedNotes(prev => [...prev, deleted])
     setDeletedShown(true)
   }
 
   function archiveNote(id) {
     const archived = notes.find(note => note.id === id)
-    const remaining = notes.filter(note => note.id !== id)
-    setNotes(remaining);
+    setNotes(prev => prev.filter(note => note.id !== id));
     setArchivedNotes(prev => [...prev, archived])
     setArchiveShown(true)
   }
@@ -248,16 +246,16 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 13
   },
-  pinnedContainer:{
-    width:"100%",
-    display:"flex",
-    alignItems:"center",
+  pinnedContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
   },
-  pinnedInfo:{
-    fontSize:12,
-    color:"#808080",
-    fontWeight:"600",
-    
+  pinnedInfo: {
+    fontSize: 12,
+    color: "#808080",
+    fontWeight: "600",
+
 
   }
 })

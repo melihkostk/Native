@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        color: "gray"
+        color: "#5F6368",
+        fontWeight:"500"
     },
     firstSection: {
         borderBottomWidth: 1,
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         gap: 3,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        paddingVertical:10
     },
     secondSection: {
         borderBottomWidth: 1,
@@ -129,5 +131,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         padding: 8
+    },
+    icon:{
+        width:25,
+        height:25
     }
 })

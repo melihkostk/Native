@@ -16,15 +16,13 @@ export default function Deleted() {
     const [flexCol, setFlexCol] = React.useState(true);
 
     function deletePerma(id) {
-        const remaining = deletedNotes.filter(note => note.id !== id);
-        setDeletedNotes(remaining)
+        setDeletedNotes(prev => prev.filter(note => note.id !== id))
         setDeletedInfo(prev => !prev)
     }
 
     function restoreThrash(id) {
         const restored = deletedNotes.find(note => note.id === id);
-        const remaining = deletedNotes.filter(note => note.id !== id);
-        setDeletedNotes(remaining);
+        setDeletedNotes(prev => prev.filter(note => note.id !== id));
         setNotes(prev => [...prev, restored]);
         setSavedInfo(prev => !prev)
     }

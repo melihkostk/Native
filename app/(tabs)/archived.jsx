@@ -15,8 +15,7 @@ export default function Archived() {
 
     function restoreArchive(id) {
         const archived = archivedNotes.find(note => note.id === id)
-        const remaining = archivedNotes.filter(note => note.id !== id);
-        setArchivedNotes(remaining)
+        setArchivedNotes(prev => prev.filter(note => note.id !== id))
         setNotes(prev => [...prev, archived])
     }
 
