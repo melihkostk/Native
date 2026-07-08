@@ -88,7 +88,7 @@ export default function Index() {
             </View>
           </View>
         </View>
-        {notes && notes.length === 0 && <View style={styles.infoContainer}>
+        {notes.length === 0 && <View style={styles.infoContainer}>
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
           <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
         </View>}

@@ -1,9 +1,13 @@
-import { Link } from "expo-router"
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native"
+import { Link } from "expo-router";
+import React from "react";
+import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Help() {
+    const [input, setInput] = React.useState("")
+    const [openItem, setOpenItem] = React.useState(null);
+
     return (
-        <View style={{ flex: 1 , backgroundColor:"white" , paddingBottom:20}}>
+        <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
             <View style={styles.helpHeader}>
                 <View>
                     <Link href="/">
@@ -20,43 +24,116 @@ export default function Help() {
                         <Image style={styles.keepIconImage} source={require("../../assets/images/keep.png")}></Image>
                     </View>
                     <Text style={styles.questionText}>Size nasıl yardımcı olabiliriz ?</Text>
-                    <TextInput style={styles.questionInput} placeholder="Sorununuzu açıklayın"></TextInput>
+                    <View style={styles.inputContainer}>
+                        <Image style={styles.searchIcon} source={require("../../assets/images/search.png")}></Image>
+                        <TextInput onChangeText={setInput} value={input} style={styles.questionInput} placeholder="Sorununuzu açıklayın"></TextInput>
+                        {input.length > 0 && (
+                            <Pressable onPress={() => setInput("")} style={styles.clearIcon}>
+                                <Image source={require("../../assets/images/close.png")}></Image>
+                            </Pressable>
+                        )}
+                    </View>
                 </View>
                 <View style={styles.helpContainer}>
                     <Text style={styles.helpItemsTitle}>Yardım konularına göz at</Text>
                     <View style={styles.helpItemsContainer}>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Google Keep kullanmaya başlama</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Not ve liste oluşturma ve düzenleme</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Notları ve listeleri organize etme</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Not ve liste arama ve paylaşma</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Hatırlatıcı oluşturma</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Araçlar ve sorun giderme</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Gemini in Keep</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
-                        <View style={styles.helpItems}>
-                            <Text style={styles.helpItemsText}>Accessibility</Text>
-                            <Image source={require("../../assets/images/down-arrow.png")}></Image>
-                        </View>
+                        <Pressable onPress={() => setOpenItem(openItem === 1 ? null : 1)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Google Keep kullanmaya başlama</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 1 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Google Keep kullanma</Text>
+                                <Text style={styles.subItemText}>Google Keep Chrome uzantısı kullanma</Text>
+                                <Text style={styles.subItemText}>Liste, hatırlatıcı ve paylaşım ayarlarını değiştirme</Text>
+                                <Text style={styles.subItemText}>Google Keep`i kullanmak için nelere ihtiyacınız var</Text>
+                                <Text style={styles.subItemText}>Google ürünlerini yan yana kullanma</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 2 ? null : 2)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Not ve liste oluşturma ve düzenleme</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 2 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Not oluşturma ve düzenleme</Text>
+                                <Text style={styles.subItemText}>Liste yapın</Text>
+                                <Text style={styles.subItemText}>Resim not alma</Text>
+                                <Text style={styles.subItemText}>Çizimi not olarak kaydetme</Text>
+                                <Text style={styles.subItemText}>Crete a list with Gemini in Google Keep</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 3 ? null : 3)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Notları ve listeleri organize etme</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 3 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Notlarınızı organize etme</Text>
+                                <Text style={styles.subItemText}>Not ve liste arşivleme</Text>
+                                <Text style={styles.subItemText}>Android ana ekranınızda not alma</Text>
+                                <Text style={styles.subItemText}>Notların sürüm geçmişini bulma</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 4 ? null : 4)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Not ve liste arama ve paylaşma</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 4 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Not ve liste arama</Text>
+                                <Text style={styles.subItemText}>Not, liste ve çizim paylaşma</Text>
+                                <Text style={styles.subItemText}>Başka bir uygulamaya Keeo notu gönderme</Text>
+                                <Text style={styles.subItemText}>Keep notunu aile grubunuzla paylaşma</Text>
+                                <Text style={styles.subItemText}>Dokümanda veya sunuda Google Keep`i kullanma</Text>
+                                <Text style={styles.subItemText}>Google Keep`teki verilerinizi dışa aktarma</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 5 ? null : 5)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Hatırlatıcı oluşturma</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 5 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Notlarınız için hatırlatıcılar oluşturma</Text>
+                                <Text style={styles.subItemText}>Google Hatırlatıcılar`daki verilerinizi dışarı aktarma</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 6 ? null : 6)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Araçlar ve sorun giderme</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 6 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Google Keep sorunlarını giderme</Text>
+                                <Text style={styles.subItemText}>Google Keep için klavye kısayolları</Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 7 ? null : 7)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Gemini in Keep</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 7 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Create a list with AI in Google Keep</Text>
+                                <Text style={styles.subItemText}>Gemini ile Google Workspace`i kullanmaya başlama</Text>
+                                <Text style={styles.subItemText}>Gemini ile Google Workspace`te desteklenen diller</Text>
+                                <Text style={styles.subItemText}>Workspace uygulamalarında Gemini için kötüye kullanım bildirme</Text>
+                                <Text style={styles.subItemText}>
+                                    Gemini ile Google Workspace, kullanıcıları kötü amaçlı içeriklere ve istem
+                                    enjeksiyonuna karşı nasıl korur?
+                                </Text>
+                            </View>)}
+                        </Pressable>
+                        <Pressable onPress={() => setOpenItem(openItem === 8 ? null : 8)} style={styles.helpItems}>
+                            <View style={styles.topic}>
+                                <Text style={styles.helpItemsText}>Accessibility</Text>
+                                <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                            </View>
+                            {openItem === 8 && (<View style={styles.subItem}>
+                                <Text style={styles.subItemText}>Google Keep`i ekran okuyucuyla kullanma</Text>
+                            </View>)}
+                        </Pressable>
                     </View>
                 </View>
                 <View style={styles.moreInfoContainer}>
@@ -64,7 +141,7 @@ export default function Help() {
                         <Text style={styles.moreHelp}>
                             Daha fazla yardıma mı ihtiyacınız var ?
                         </Text>
-                        <Text>
+                        <Text style={styles.steps}>
                             Bir sonraki adımları deneyin
                         </Text>
                     </View>
@@ -92,18 +169,18 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop:7
+        paddingTop: 7
     },
     helpHeader: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor:"#005F6A",
-        paddingTop:70,
-        paddingBottom:15,
-        gap:30,
-        paddingHorizontal:15
+        backgroundColor: "#005F6A",
+        paddingTop: 70,
+        paddingBottom: 15,
+        gap: 30,
+        paddingHorizontal: 15
     },
     keepIcon: {
         width: 45,
@@ -112,7 +189,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 6,
-        backgroundColor:"white",
+        backgroundColor: "white",
         borderRadius: "100%",
         display: "flex",
         alignItems: "center",
@@ -125,8 +202,8 @@ const styles = StyleSheet.create({
     questionText: {
         fontSize: 28,
         textAlign: "center",
-        paddingTop:15,
-        paddingBottom:30
+        paddingTop: 15,
+        paddingBottom: 30
     },
     container: {
         display: "flex",
@@ -136,14 +213,18 @@ const styles = StyleSheet.create({
         maxWidth: "95%",
         paddingBottom: 70
     },
+    inputContainer: {
+        width: "100%",
+        maxWidth: "95%"
+    },
     questionInput: {
         borderWidth: 1,
         borderColor: "gray",
         width: "100%",
         paddingVertical: 15,
-        paddingHorizontal: 30,
+        paddingHorizontal: 50,
         borderRadius: 8,
-        backgroundColor:"white"
+        backgroundColor: "white"
     },
     helpContainer: {
         display: "flex",
@@ -159,21 +240,19 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     helpItems: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
         borderBottomWidth: 1,
         borderBottomColor: "gray",
         display: "flex",
-        flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center"
     },
     helpItemsTitle: {
         paddingBottom: 15,
-        fontWeight: "600"
+        fontWeight: "600",
     },
     helpItemsText: {
-        fontWeight: "600"
+        fontWeight: "600",
+        fontSize:15
     },
     moreInfoContainer: {
         display: "flex",
@@ -199,13 +278,44 @@ const styles = StyleSheet.create({
         borderRadius: 16
     },
     moreHelp: {
-        fontSize: 18
+        fontSize: 18,
+        textAlign:"center"
+    },
+    steps:{
+        fontSize: 14,
+        textAlign:"center"
     },
     keepTitle: {
-        color:"white",
-        fontWeight:"600",
-        fontSize:"21"
+        color: "white",
+        fontWeight: "600",
+        fontSize: 20
+    },
+    subItem: {
+        backgroundColor: "#F3EEE7",
+        width: "100%",
+        paddingHorizontal: 20,
+    },
+    searchIcon: {
+        position: "absolute",
+        top: 13,
+        left: 12
+    },
+    clearIcon: {
+        position: "absolute",
+        top: 13,
+        right: 12
+    },
+    topic: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        width: "100%",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    subItemText: {
+        paddingVertical: 10
     }
-
 
 })
