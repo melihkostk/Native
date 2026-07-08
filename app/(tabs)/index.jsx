@@ -30,6 +30,7 @@ export default function Index() {
   const [deletedShown, setDeletedShown] = React.useState(false);
   const [archiveShown, setArchiveShown] = React.useState(false);
   const [flexCol, setFlexCol] = React.useState(true);
+  const [fixed, setFixed] = React.useState(false);
 
   React.useEffect(() => {
     if (!deletedShown) return;
@@ -56,7 +57,7 @@ export default function Index() {
     const remaining = notes.filter(note => note.id !== id)
     setNotes(remaining)
     setDeletedNotes(prev => [...prev, deleted])
-    setDeletedShown(prev => !prev)
+    setDeletedShown(true)
   }
 
   function archiveNote(id) {
@@ -64,12 +65,12 @@ export default function Index() {
     const remaining = notes.filter(note => note.id !== id)
     setNotes(remaining);
     setArchivedNotes(prev => [...prev, archived])
-    setArchiveShown(prev => !prev)
+    setArchiveShown(true)
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {noteInputShown && <NoteInput color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
+      {noteInputShown && <NoteInput fixed={fixed} setFixed={setFixed} color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
       <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
       <View style={styles.container}>
         <View style={styles.noteInput}>

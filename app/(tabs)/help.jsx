@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: "100%",
-        maxWidth: "95%"
+        
     },
     questionInput: {
         borderWidth: 1,

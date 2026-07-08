@@ -51,7 +51,8 @@ export default function NoteInput(props) {
                     id: Date.now(),
                     title: props.title,
                     description: props.description,
-                    color: props.color
+                    color: props.color,
+                    fixed: props.fixed
                 }
             ]);
         }
@@ -69,14 +70,12 @@ export default function NoteInput(props) {
                     </View>
                 </Pressable>
                 <View style={styles.headerRight}>
-                    <View>
-                        <Image style={styles.headerItems} source={require("../../assets/images/point.png")}></Image>
-                    </View>
+                    <Pressable onPress={() => props.setFixed(prev => !prev)}>
+                        {!props.fixed && <Image style={styles.headerItems} source={require("../../assets/images/point.png")}></Image>}
+                        {props.fixed && <Image style={styles.headerItems} source={require("../../assets/images/point-off.png")}></Image>}
+                    </Pressable>
                     <View>
                         <Image style={styles.headerItems} source={require("../../assets/images/alert.png")}></Image>
-                    </View>
-                    <View>
-                        <Image style={styles.headerItems} source={require("../../assets/images/small-archive.png")}></Image>
                     </View>
                 </View>
             </View>
