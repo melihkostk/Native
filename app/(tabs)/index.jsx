@@ -93,8 +93,8 @@ export default function Index() {
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
           <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
         </View>}
-        <ScrollView contentContainerStyle={[styles.notesContainer , !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
-          <View style={[styles.notesContainer , !flexCol && styles.rowContainer]}>
+        <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+          <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
             {notes
               .filter((item) => {
                 return (
@@ -103,26 +103,30 @@ export default function Index() {
                 );
               })
               .map((item) => (
-                <Note
-                  key={item.id}
-                  title={item.title}
-                  description={item.description}
-                  setNotes={setNotes}
-                  notes={notes}
-                  id={item.id}
-                  color={item.color}
-                  setDeletedNotes={setDeletedNotes}
-                  deletedNotes={deletedNotes}
-                  archivedNotes={archivedNotes}
-                  setArchivedNotes={setArchivedNotes}
-                  setNoteInputShown={setNoteInputShown}
-                  setDeletedShown={setDeletedShown}
-                  setArchiveShown={setArchiveShown}
-                  archiveNote={archiveNote}
-                  deleteNote={deleteNote}
-                  flexCol={flexCol}
-                  page="home"
-                />
+                <View style={styles.pinnedContainer} key={item.id}>
+                  {item.fixed && <Text style={styles.pinnedInfo}>Sabitlenen</Text>}
+                  <Note
+                    key={item.id}
+                    title={item.title}
+                    description={item.description}
+                    setNotes={setNotes}
+                    notes={notes}
+                    id={item.id}
+                    color={item.color}
+                    setDeletedNotes={setDeletedNotes}
+                    deletedNotes={deletedNotes}
+                    archivedNotes={archivedNotes}
+                    setArchivedNotes={setArchivedNotes}
+                    setNoteInputShown={setNoteInputShown}
+                    setDeletedShown={setDeletedShown}
+                    setArchiveShown={setArchiveShown}
+                    archiveNote={archiveNote}
+                    deleteNote={deleteNote}
+                    flexCol={flexCol}
+                    fixed={item.fixed}
+                    page="home"
+                  />
+                </View>
               ))}
           </View>
         </ScrollView>
@@ -220,11 +224,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 30
   },
-  rowContainer:{
+  rowContainer: {
     display: "flex",
     width: "100%",
-    flexDirection:"row",
-    flexWrap:"wrap",
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
     marginTop: 8,
     alignItems: "center",
@@ -243,6 +247,18 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "500",
     fontSize: 13
+  },
+  pinnedContainer:{
+    width:"100%",
+    display:"flex",
+    alignItems:"center",
+  },
+  pinnedInfo:{
+    fontSize:12,
+    color:"#808080",
+    fontWeight:"600",
+    
+
   }
 })
 
