@@ -24,7 +24,7 @@ export default function NoteInput(props) {
                 if (gestureState.dy > 30) {
                     Animated.timing(pan.y, {
                         toValue: -300,
-                        duration:10,
+                        duration: 10,
                         useNativeDriver: false,
                     }).start(() => {
                         setColorShown(false)
@@ -56,7 +56,7 @@ export default function NoteInput(props) {
                 }
             ]);
         }
-        props.setNoteInputShown(prev => !prev)
+        props.setNoteInputShown(false)
         props.setTitle("")
         props.setDescription("")
     }
@@ -134,14 +134,16 @@ export default function NoteInput(props) {
                         { translateY: pan.y }
                     ]
                 }]}>
-                    <View style={styles.moreOptions}>
-                        <Image source={require("../../assets/images/small-delete.png")}></Image>
-                        <Text>Sil</Text>
-                    </View>
-                    <View style={styles.moreOptions}>
+                    <Pressable onPress={() => {
+                        for (let i = 0; i < 2; i++) {
+                            addNote()
+                        }
+                    }}
+
+                        style={styles.moreOptions}>
                         <Image source={require("../../assets/images/copy.png")}></Image>
                         <Text>Kopyasını oluştur</Text>
-                    </View>
+                    </Pressable>
                     <View style={styles.moreOptions}>
                         <Image source={require("../../assets/images/share.png")}></Image>
                         <Text>Gönder</Text>
@@ -233,10 +235,11 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 12
     },
     moreOptions: {
-        paddingVertical: 6,
+        padding: 10,
         display: "flex",
         flexDirection: "row",
-        gap: 8
+        gap: 8,
+        alignItems: "center"
     },
     colorMenu: {
         position: "absolute",
