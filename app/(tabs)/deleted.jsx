@@ -39,9 +39,11 @@ export default function Deleted() {
 
     React.useEffect(() => {
         if (!deletedInfo) return;
+
         const timer = setTimeout(() => {
             setDeletedInfo(prev => !prev)
         }, 3000)
+        
         return () => clearTimeout(timer)
     }, [deletedInfo])
 

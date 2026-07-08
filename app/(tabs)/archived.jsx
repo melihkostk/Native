@@ -12,37 +12,55 @@ export default function Archived() {
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [flexCol, setFlexCol] = React.useState(true);
+    const [unArchive, setUnArchive] = React.useState(false)
+
+    React.useEffect(() => {
+
+        if (!unArchive) return
+
+        const timer = setTimeout(() => {
+            setUnArchive(false)
+        }, 3000)
+
+        return () => clearTimeout(timer)
+    }, [unArchive])
 
     function restoreArchive(id) {
         const archived = archivedNotes.find(note => note.id === id)
         setArchivedNotes(prev => prev.filter(note => note.id !== id))
         setNotes(prev => [...prev, archived])
+        setUnArchive(true)
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
-            {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
-                <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>
-                <Text style={styles.infoText}>Arşivlenen notlarınız burada görünür</Text>
-            </View>}
-            <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
-                <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
-                    {archivedNotes.map((item) => (
-                        <Note
-                            id={item.id}
-                            key={item.id}
-                            title={item.title}
-                            description={item.description}
-                            color={item.color}
-                            restoreArchive={restoreArchive}
-                            page="archived"
-                            flexCol={flexCol}
-                        />
-                    ))}
-                </View>
-            </ScrollView>
+            <View style={styles.mainContainer}>
+                {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
+                    <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>
+                    <Text style={styles.infoText}>Arşivlenen notlarınız burada görünür</Text>
+                </View>}
+                <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+                    <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
+                        {archivedNotes.map((item) => (
+                            <Note
+                                id={item.id}
+                                key={item.id}
+                                title={item.title}
+                                description={item.description}
+                                color={item.color}
+                                restoreArchive={restoreArchive}
+                                page="archived"
+                                flexCol={flexCol}
+                            />
+                        ))}
+                    </View>
+                </ScrollView>
+                {unArchive && <View style={styles.deletedInfo}>
+                    <Text style={styles.deletedInfoText}>Not arşivden çıkarıldı</Text>
+                </View>}
+            </View>
         </SafeAreaView>
     )
 }
@@ -83,5 +101,26 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingBottom: 30
+    },
+    deletedInfo: {
+        position: "absolute",
+        bottom: 10,
+        width: "95%",
+        backgroundColor: "#212121",
+        padding: 10,
+        borderRadius: 6,
+        marginLeft: "auto",
+        marginRight: "auto"
+    },
+    deletedInfoText: {
+        color: "white",
+        fontWeight: "500",
+        fontSize: 13
+    },
+    mainContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1
     },
 })
