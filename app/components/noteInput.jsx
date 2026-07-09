@@ -45,21 +45,29 @@ export default function NoteInput(props) {
     function addNote() {
 
         if (props.title?.trim() || props.description?.trim()) {
-            props.setNotes(prev => [
-                ...prev,
-                {
-                    id: Date.now(),
-                    title: props.title,
-                    description: props.description,
-                    color: props.color,
-                    fixed: props.fixed
-                }
-            ]);
+
+            const note = {
+                id: Date.now(),
+                title: props.title,
+                description: props.description,
+                color: props.color,
+                fixed: props.fixed
+            }
+            props.setNotes(prev => [...prev, note]);
+
+            fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(note),
+            })
         }
         props.setNoteInputShown(false)
         props.setTitle("")
         props.setDescription("")
         props.setColor("white")
+
     }
 
     return (
