@@ -26,8 +26,13 @@ export default function Deleted() {
     })
 
     function deletePerma(id) {
-        setDeletedNotes(prev => prev.filter(note => note.id !== id))
-        setDeletedInfo(prev => !prev)
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+            method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Deleted :" , data)
+        })
     }
 
     function restoreThrash(id) {

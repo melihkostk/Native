@@ -64,7 +64,7 @@ export default function Index() {
 
   function deleteNote(id) {
 
-    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/${id}` , {
+    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}` , {
       method:"DELETE",
     })
     .then(res => res.json())
