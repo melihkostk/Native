@@ -33,6 +33,16 @@ export default function Index() {
   const [fixed, setFixed] = React.useState(false);
 
   React.useEffect(() => {
+    fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes" , {
+      method:"GET"
+    })
+    .then(res => res.json())
+    .then(data => {
+      setNotes(data)
+    })
+  },[])
+
+  React.useEffect(() => {
     if (!deletedShown) return;
 
     const timer = setTimeout(() => {
@@ -60,11 +70,24 @@ export default function Index() {
   }
 
   function archiveNote(id) {
-    const archived = notes.find(note => note.id === id)
-    setNotes(prev => prev.filter(note => note.id !== id));
-    setArchivedNotes(prev => [...prev, archived])
-    setArchiveShown(true)
+    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        is_archived: true,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setNotes(prev => prev.filter(note => note.id !== id));
+        setArchivedNotes(prev => [...prev, data])
+        setArchiveShown(true)
+         console.log(data);
+      })
   }
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -8,6 +8,14 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
+    React.useEffect(() => {
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list")
+            .then(res => res.json())
+            .then(data => {
+                setArchivedNotes(data)
+            })
+    },[])
+
     const { archivedNotes, setArchivedNotes, setNotes } = useNotes();
 
     const [sidebarShown, setSiderbarShown] = React.useState(false)

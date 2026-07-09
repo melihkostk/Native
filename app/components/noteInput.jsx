@@ -47,7 +47,6 @@ export default function NoteInput(props) {
         if (props.title?.trim() || props.description?.trim()) {
 
             const note = {
-                id: Date.now(),
                 title: props.title,
                 description: props.description,
                 color: props.color,

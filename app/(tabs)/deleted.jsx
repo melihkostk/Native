@@ -28,6 +28,14 @@ export default function Deleted() {
     }
 
     React.useEffect(() => {
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
+            .then(res => res.json())
+            .then(data => {
+                setDeletedNotes(data)
+            })
+    })
+
+    React.useEffect(() => {
         if (!savedInfo) return;
 
         const timer = setTimeout(() => {
