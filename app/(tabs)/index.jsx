@@ -63,12 +63,22 @@ export default function Index() {
   }, [archiveShown]);
 
   function deleteNote(id) {
+
+    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/${id}` , {
+      method:"DELETE",
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Deleted:", data)
+      setNotes(prev => prev.filter(note => note.id !== id));
+    })
     const deleted = notes.find(note => note.id === id)
     setNotes(prev => prev.filter(note => note.id !== id));
     setDeletedNotes(prev => [...prev, deleted])
     setDeletedShown(true)
   }
 
+  
   function archiveNote(id) {
     fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
       method: "PATCH",

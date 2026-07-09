@@ -14,6 +14,16 @@ export default function Deleted() {
     const [savedInfo, setSavedInfo] = React.useState(false)
     const [deletedInfo, setDeletedInfo] = React.useState(false)
     const [flexCol, setFlexCol] = React.useState(true);
+    const [ID, setID] = React.useState([])
+
+    React.useEffect(() => {
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
+            .then(res => res.json())
+            .then(data => {
+                setDeletedNotes(data)
+                setID(data.map(item => item.id));
+            })
+    })
 
     function deletePerma(id) {
         setDeletedNotes(prev => prev.filter(note => note.id !== id))
@@ -27,13 +37,13 @@ export default function Deleted() {
         setSavedInfo(prev => !prev)
     }
 
-    React.useEffect(() => {
-        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
-            .then(res => res.json())
-            .then(data => {
-                setDeletedNotes(data)
+    function deleteAll() {
+        ID.map(item => {
+            fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${item}`, {
+                method: "DELETE"
             })
-    })
+        })
+    }
 
     React.useEffect(() => {
         if (!savedInfo) return;
@@ -51,7 +61,7 @@ export default function Deleted() {
         const timer = setTimeout(() => {
             setDeletedInfo(prev => !prev)
         }, 3000)
-        
+
         return () => clearTimeout(timer)
     }, [deletedInfo])
 
@@ -81,13 +91,13 @@ export default function Deleted() {
                         <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
                             <Text style={styles.deleteButtons}>İptal</Text>
                         </Pressable>
-                        <Pressable onPress={() => { setDeletedNotes([]); setDeleteWarning(prev => !prev) }}>
+                        <Pressable onPress={() => { deleteAll(); setDeleteWarning(prev => !prev) }}>
                             <Text style={styles.deleteButtons}>Çöp Kutusu`nu boşalt</Text>
                         </Pressable>
                     </View>
                 </View>}
-                <ScrollView contentContainerStyle={[styles.notesContainer , !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
-                    <View style={[styles.notesContainer , !flexCol && styles.rowContainer]}>
+                <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+                    <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
                         {deletedNotes.map((item) => (
                             <Note
                                 key={item.id}
