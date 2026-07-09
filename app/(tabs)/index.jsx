@@ -84,7 +84,6 @@ export default function Index() {
         setNotes(prev => prev.filter(note => note.id !== id));
         setArchivedNotes(prev => [...prev, data])
         setArchiveShown(true)
-         console.log(data);
       })
   }
 

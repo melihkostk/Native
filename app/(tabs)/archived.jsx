@@ -14,7 +14,7 @@ export default function Archived() {
             .then(data => {
                 setArchivedNotes(data)
             })
-    },[])
+    }, [])
 
     const { archivedNotes, setArchivedNotes, setNotes } = useNotes();
 
@@ -38,6 +38,16 @@ export default function Archived() {
         setArchivedNotes(prev => prev.filter(note => note.id !== id))
         setNotes(prev => [...prev, archived])
         setUnArchive(true)
+
+        fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                is_archived: false,
+            }),
+        })
     }
 
     return (
