@@ -33,14 +33,14 @@ export default function Index() {
   const [fixed, setFixed] = React.useState(false);
 
   React.useEffect(() => {
-    fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes" , {
-      method:"GET"
+    fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
+      method: "GET"
     })
-    .then(res => res.json())
-    .then(data => {
-      setNotes(data)
-    })
-  },[])
+      .then(res => res.json())
+      .then(data => {
+        setNotes(data)
+      })
+  }, [])
 
   React.useEffect(() => {
     if (!deletedShown) return;
@@ -64,21 +64,21 @@ export default function Index() {
 
   function deleteNote(id) {
 
-    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}` , {
-      method:"DELETE",
+    fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
+      method: "DELETE",
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Deleted:", data)
-      setNotes(prev => prev.filter(note => note.id !== id));
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Deleted:", data)
+        setNotes(prev => prev.filter(note => note.id !== id));
+      })
     const deleted = notes.find(note => note.id === id)
     setNotes(prev => prev.filter(note => note.id !== id));
     setDeletedNotes(prev => [...prev, deleted])
     setDeletedShown(true)
   }
 
-  
+
   function archiveNote(id) {
     fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}/archive`, {
       method: "PATCH",

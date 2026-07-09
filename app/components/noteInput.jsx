@@ -42,7 +42,7 @@ export default function NoteInput(props) {
         }),
     ).current;
 
-    function addNote() {
+    async function addNote() {
 
         if (props.title?.trim() || props.description?.trim()) {
 
@@ -51,22 +51,28 @@ export default function NoteInput(props) {
                 description: props.description,
                 color: props.color,
                 fixed: props.fixed
-            }
-            props.setNotes(prev => [...prev, note]);
+            };
 
-            fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(note),
-            })
+            const res = await fetch(
+                "https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(note),
+                }
+            );
+
+            const result = await res.json();
+            
+            props.setNotes(prev => [...prev, result.data]);
         }
-        props.setNoteInputShown(false)
-        props.setTitle("")
-        props.setDescription("")
-        props.setColor("white")
 
+        props.setNoteInputShown(false);
+        props.setTitle("");
+        props.setDescription("");
+        props.setColor("white");
     }
 
     return (

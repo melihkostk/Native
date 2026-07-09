@@ -17,22 +17,21 @@ export default function Deleted() {
     const [ID, setID] = React.useState([])
 
     React.useEffect(() => {
-        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list")
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list" , {
+            method:"GET"
+        })
             .then(res => res.json())
             .then(data => {
                 setDeletedNotes(data)
                 setID(data.map(item => item.id));
             })
-    })
+    },[])
 
     function deletePerma(id) {
         fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
             method: "DELETE"
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log("Deleted :" , data)
-        })
+        setDeletedNotes(prev => prev.filter(note => note.id !== id))
     }
 
     function restoreThrash(id) {
@@ -47,6 +46,7 @@ export default function Deleted() {
             fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${item}`, {
                 method: "DELETE"
             })
+            setDeletedNotes([])
         })
     }
 
