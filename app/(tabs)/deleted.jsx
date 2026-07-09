@@ -32,6 +32,7 @@ export default function Deleted() {
             method: "DELETE"
         })
         setDeletedNotes(prev => prev.filter(note => note.id !== id))
+        setDeletedInfo(prev => !prev)
     }
 
     function restoreThrash(id) {
