@@ -58,7 +58,7 @@ export default function Sidebar(props) {
                 <View style={styles.secondSection}>
                     <Pressable style={styles.linkContainer}>
                         <Image source={require("../../assets/images/small-bulb.png")}></Image>
-                        <Link style={styles.links} href={"/"}>Notlar</Link>
+                        <Link style={styles.links} href={"/home"}>Notlar</Link>
                     </Pressable>
                     <Pressable style={styles.linkContainer}>
                         <Image source={require("../../assets/images/small-archive.png")}></Image>
