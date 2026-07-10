@@ -46,8 +46,8 @@ export default function Login() {
                         <Text style={styles.useAccount}>Google Hesabınızı kullanın</Text>
                     </View>
                     <View style={styles.container}>
-                        <TextInput placeholderTextColor="#202124" value={emailInput} onChangeText={setEmailInput} style={[styles.inputs , emptyWarning && styles.wrongInput]} placeholder="E-posta"></TextInput>
-                        <TextInput placeholderText placeholderTextColor="#202124" value={passwordInput} onChangeText={setPasswordInput} style={[styles.inputs , emptyWarning && styles.wrongInput]} placeholder="Şifre"></TextInput>
+                        <TextInput placeholderTextColor={emptyWarning ? "#EA4335" : "#202124"} value={emailInput} onChangeText={setEmailInput} style={[styles.inputs , emptyWarning && styles.wrongInput , notFoundWarning && styles.wrongInput]} placeholder="E-posta"></TextInput>
+                        <TextInput  placeholderTextColor={emptyWarning ? "#EA4335" : "#202124"}  value={passwordInput} onChangeText={setPasswordInput} style={[styles.inputs , emptyWarning && styles.wrongInput , notFoundWarning && styles.wrongInput]} placeholder="Şifre"></TextInput>
                         {emptyWarning && <View style={styles.errorMesageContainer}>
                             <Image source={require("../../assets/images/error.png")}></Image>
                             <Text style={styles.errorMesage}>Bir e-posta adresi ve şifre girin</Text>
