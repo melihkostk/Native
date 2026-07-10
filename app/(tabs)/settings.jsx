@@ -1,12 +1,20 @@
 import { Link } from "expo-router";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function Settings() {
+
+    const [newItem, setNewItem] = React.useState(true);
+    const [moveDown, setMoveDown] = React.useState(true);
+    const [preview, setPreview] = React.useState(true);
+    const [share, setShare] = React.useState(true);
+
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <View style={styles.settingsHeader}>
-                    <Link href={"/"}>
+                    <Link href={"/home"}>
                         <Image source={require("../../assets/images/close.png")}></Image>
                     </Link>
                     <Text style={styles.pageTitle}>Ayarlar</Text>
@@ -15,30 +23,30 @@ export default function Settings() {
                     <Text style={styles.title}>Görüntüleme Seçenekleri</Text>
                     <View style={styles.settingsItem}>
                         <Text style={styles.text}>Yeni öğeleri alta ekle</Text>
-                        <View style={styles.key}>
-                            <View style={styles.button}></View>
-                        </View>
+                        <Pressable onPress={() => setNewItem(prev => !prev)}  style={[styles.key , !newItem && styles.inActiveKey]}>
+                            <View style={[styles.button , !newItem && styles.inActiveButton]}></View>
+                        </Pressable>
                     </View>
                     <View style={styles.settingsItem}>
                         <Text style={styles.text}>İşaretlenen öğeleri alta taşı</Text>
-                        <View style={styles.key}>
-                            <View style={styles.button}></View>
-                        </View>
+                        <Pressable onPress={() => setMoveDown(prev => !prev)} style={[styles.key , !moveDown && styles.inActiveKey]}>
+                            <View style={[styles.button , !moveDown && styles.inActiveButton]}></View>
+                        </Pressable>
                     </View>
                     <View style={styles.settingsItem}>
                         <Text style={styles.text}>Zengin bağlantı önizlemelerini göster</Text>
-                        <View style={styles.key}>
-                            <View style={styles.button}></View>
-                        </View>
+                        <Pressable onPress={() => setPreview(prev => !prev)} style={[styles.key , !preview && styles.inActiveKey]}>
+                            <View style={[styles.button , !preview && styles.inActiveButton]}></View>
+                        </Pressable>
                     </View>
                 </View>
                 <View style={styles.sections}>
                     <Text style={styles.title}>Paylaşım</Text>
                     <View style={styles.settingsItem}>
                         <Text style={styles.text}>Paylaşımı etkinleştir</Text>
-                        <View style={styles.key}>
-                            <View style={styles.button}></View>
-                        </View>
+                        <Pressable onPress={() => setShare(prev => !prev)} style={[styles.key , !share && styles.inActiveKey]}>
+                            <View style={[styles.button , !share && styles.inActiveButton]}></View>
+                        </Pressable>
                     </View>
                 </View>
                 <View style={styles.sections}>
@@ -100,11 +108,28 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center"
     },
+    inActiveKey:{
+        backgroundColor: "#DCDCDC",
+        width: 45,
+        height: 25,
+        borderRadius: 30,
+        position: "relative",
+        display: "flex",
+        justifyContent: "center"
+    },
     button: {
         position: "absolute",
         width: 20,
         height: 20,
         right: 2,
+        backgroundColor: "white",
+        borderRadius: "100%"
+    },
+    inActiveButton:{
+        position: "absolute",
+        width: 20,
+        height: 20,
+        left: 2,
         backgroundColor: "white",
         borderRadius: "100%"
     },

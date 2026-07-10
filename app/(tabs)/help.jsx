@@ -10,7 +10,7 @@ export default function Help() {
         <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
             <View style={styles.helpHeader}>
                 <View>
-                    <Link href="/">
+                    <Link href="/home">
                         <Image source={require("../../assets/images/close.png")}></Image>
                     </Link>
                 </View>

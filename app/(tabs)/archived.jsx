@@ -9,7 +9,9 @@ const { height } = Dimensions.get('window');
 export default function Archived() {
 
     React.useEffect(() => {
-        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list")
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list" , {
+            method:"GET"
+        })
             .then(res => res.json())
             .then(data => {
                 setArchivedNotes(data)
