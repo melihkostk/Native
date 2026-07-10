@@ -78,7 +78,6 @@ export default function Sidebar(props) {
                         <Image source={require("../../assets/images/help.png")}></Image>
                         <Link style={styles.links} href={"/help"}>Yardım</Link>
                     </Pressable>
-                    <Link href={"/login"}>Giriş</Link>
                 </View>
             </AnimatedSafeAreaView>)
     )
