@@ -15,10 +15,12 @@ export default function NoteInput(props) {
             onStartShouldSetPanResponder: (evt, gestureState) => true,
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
 
-            onPanResponderMove: Animated.event(
-                [null, { dx: pan.x, dy: pan.y }],
-                { useNativeDriver: false }
-            ),
+            onPanResponderMove: (_, gestureState) => {
+                pan.setValue({
+                    x: 0,
+                    y: Math.max(0, gestureState.dy),
+                });
+            },
             onPanResponderRelease: (_, gestureState) => {
 
                 if (gestureState.dy > 30) {
@@ -65,7 +67,7 @@ export default function NoteInput(props) {
             );
 
             const result = await res.json();
-            
+
             props.setNotes(prev => [...prev, result.data]);
         }
 
@@ -116,31 +118,33 @@ export default function NoteInput(props) {
                         { translateY: pan.y }
                     ]
                 }]}>
-                    <Text>
-                        Renk
-                    </Text>
-                    <View style={styles.colorOptions}>
-                        <Pressable onPress={() => props.setColor("white")}>
-                            <View style={styles.colorWhite}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#F0918A")}>
-                            <View style={styles.colorPink}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#FBF180")}>
-                            <View style={styles.colorYellow}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#CEFB98")}>
-                            <View style={styles.colorGreen}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#ABFBEA")}>
-                            <View style={styles.colorMint}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#CCEEF5")}>
-                            <View style={styles.colorBlue}></View>
-                        </Pressable>
-                        <Pressable onPress={() => props.setColor("#D7B2F9")}>
-                            <View style={styles.colorLila}></View>
-                        </Pressable>
+                    <View style={styles.colorContainer}>
+                        <Text>
+                            Renk
+                        </Text>
+                        <View style={styles.colorOptions}>
+                            <Pressable onPress={() => props.setColor("white")}>
+                                <View style={styles.colorWhite}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#F0918A")}>
+                                <View style={styles.colorPink}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#FBF180")}>
+                                <View style={styles.colorYellow}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#CEFB98")}>
+                                <View style={styles.colorGreen}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#ABFBEA")}>
+                                <View style={styles.colorMint}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#CCEEF5")}>
+                                <View style={styles.colorBlue}></View>
+                            </Pressable>
+                            <Pressable onPress={() => props.setColor("#D7B2F9")}>
+                                <View style={styles.colorLila}></View>
+                            </Pressable>
+                        </View>
                     </View>
                 </AnimatedSafeAreaView>}
                 {moreShown && <AnimatedSafeAreaView {...panResponder.panHandlers} style={[styles.moreMenu, {
@@ -266,6 +270,9 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
         paddingBottom: 50
+    },
+    colorContainer:{
+        padding:10
     },
     colorOptions: {
         display: "flex",

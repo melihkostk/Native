@@ -18,15 +18,17 @@ export default function Sidebar(props) {
             onPanResponderGrant: (evt, gestureState) => {
             },
 
-            onPanResponderMove: Animated.event(
-                [null, { dx: pan.x, dy: pan.y }],
-                { useNativeDriver: false }
-            ),
+            onPanResponderMove: (_, gestureState) => {
+                pan.setValue({
+                    x: Math.min(0, gestureState.dx),
+                    y: 0,
+                });
+            },
 
             onPanResponderRelease: (_, gestureState) => {
                 if (gestureState.dx < -50) {
                     Animated.timing(pan.x, {
-                        toValue: -300, 
+                        toValue: -300,
                         duration: 200,
                         useNativeDriver: false,
                     }).start(() => {
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         color: "#5F6368",
-        fontWeight:"500"
+        fontWeight: "500"
     },
     firstSection: {
         borderBottomWidth: 1,
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 3,
         paddingHorizontal: 20,
-        paddingVertical:10
+        paddingVertical: 10
     },
     secondSection: {
         borderBottomWidth: 1,
@@ -132,8 +134,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 8
     },
-    icon:{
-        width:25,
-        height:25
+    icon: {
+        width: 25,
+        height: 25
     }
 })

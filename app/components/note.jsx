@@ -64,7 +64,7 @@ export default function Note(props) {
                 },
             ]}
         >
-            <Pressable onPress={() => props.setNoteInputShown(prev => !prev)}>
+            <Pressable onPress={props.page === "home" ? () => props.setNoteInputShown(prev => !prev) : undefined}>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.desciption}>{props.description}</Text>
             </Pressable>
