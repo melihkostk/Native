@@ -55,7 +55,7 @@ export default function Archived() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" flexCol={flexCol} setFlexCol={setFlexCol} />
-            <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
+            <Sidebar page="archived" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
                 {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
                     <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>

@@ -74,7 +74,7 @@ export default function Deleted() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
-            <Sidebar sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
+            <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>

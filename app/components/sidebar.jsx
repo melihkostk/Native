@@ -58,27 +58,40 @@ export default function Sidebar(props) {
                     <Text style={styles.title}>Keep</Text>
                 </View>
                 <View style={styles.secondSection}>
-                    <Pressable style={styles.linkContainer}>
-                        <Image source={require("../../assets/images/small-bulb.png")}></Image>
-                        <Link style={styles.links} href={"/home"}>Notlar</Link>
-                    </Pressable>
-                    <Pressable style={styles.linkContainer}>
-                        <Image source={require("../../assets/images/small-archive.png")}></Image>
-                        <Link style={styles.links} href={"/archived"}>Arşiv</Link>
-                    </Pressable>
-                    <Pressable style={styles.linkContainer}>
-                        <Image source={require("../../assets/images/small-delete.png")}></Image>
-                        <Link style={styles.links} href={"/deleted"}>Çöp Kutusu</Link>
-                    </Pressable>
+                    <Link href={"/home"} style={[styles.linkContainer, props.page === "home" && styles.activeLinkContainer]}>
+                        <View style={styles.linkImage}>
+                            {props.page !== "home" && <Image source={require("../../assets/images/gray-bulb.png")}></Image>}
+                            {props.page === "home" && <Image source={require("../../assets/images/blue-bulb.png")}></Image>}
+                            <Text style={[styles.links, props.page === "home" && styles.activeLink]}>Notlar</Text>
+                        </View>
+                    </Link>
+                    <Link href={"/archived"} style={[styles.linkContainer, props.page === "archived" && styles.activeLinkContainer]}>
+                        <View style={styles.linkImage}>
+                            {props.page !== "archived" && <Image source={require("../../assets/images/gray-archive.png")}></Image>}
+                            {props.page === "archived" && <Image source={require("../../assets/images/blue-archive.png")}></Image>}
+                            <Text style={[styles.links, props.page === "archived" && styles.activeLink]}>Arşiv</Text>
+                        </View>
+                    </Link>
+                    <Link href={"/deleted"} style={[styles.linkContainer, props.page === "deleted" && styles.activeLinkContainer]}>
+                        <View style={styles.linkImage}>
+                            {props.page !== "deleted" && <Image source={require("../../assets/images/gray-delete.png")}></Image>}
+                            {props.page === "deleted" && <Image source={require("../../assets/images/blue-delete.png")}></Image>}
+                            <Text style={[styles.links, props.page === "deleted" && styles.activeLink]}>Çöp Kutusu</Text>
+                        </View>
+                    </Link>
                 </View>
                 <View style={styles.thirdSection}>
                     <Pressable style={styles.linkContainer}>
-                        <Image source={require("../../assets/images/small-settings.png")}></Image>
-                        <Link style={styles.links} href={"/settings"}>Ayarlar</Link>
+                        <View style={styles.linkImage}>
+                            <Image source={require("../../assets/images/gray-settings.png")}></Image>
+                            <Link style={styles.links} href={"/settings"}>Ayarlar</Link>
+                        </View>
                     </Pressable>
                     <Pressable style={styles.linkContainer}>
-                        <Image source={require("../../assets/images/help.png")}></Image>
-                        <Link style={styles.links} href={"/help"}>Yardım</Link>
+                        <View style={styles.linkImage}>
+                            <Image source={require("../../assets/images/gray-help.png")}></Image>
+                            <Link style={styles.links} href={"/help"}>Yardım</Link>
+                        </View>
                     </Pressable>
                 </View>
             </AnimatedSafeAreaView>)
@@ -117,25 +130,51 @@ const styles = StyleSheet.create({
     secondSection: {
         borderBottomWidth: 1,
         borderColor: "#e5e5e5",
-        paddingHorizontal: 10
+        paddingRight: 10,
+        paddingVertical: 10
     },
     thirdSection: {
-        paddingHorizontal: 10
+        paddingRight: 10,
+        paddingVertical: 10
     },
     links: {
         fontWeight: 600,
         paddingVertical: 10,
         paddingHorizontal: 20,
-        color: "#5F6368"
+        color: "#5F6368",
+    },
+    activeLink: {
+        color: "#1A73E8",
+        fontWeight: 600,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+
     },
     linkContainer: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        padding: 8
+        padding: 8,
+        borderTopRightRadius: 30,
+        borderBottomRightRadius: 30
+    },
+    activeLinkContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 8,
+        backgroundColor: "#E8F0FD",
+        borderTopRightRadius: 30,
+        borderBottomRightRadius: 30
     },
     icon: {
         width: 25,
         height: 25
+    },
+    linkImage: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        paddingLeft: 15
     }
 })
