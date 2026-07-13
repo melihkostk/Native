@@ -125,7 +125,7 @@ export default function Help() {
                                 </Text>
                             </View>)}
                         </Pressable>
-                        <Pressable onPress={() => setOpenItem(openItem === 8 ? null : 8)} style={styles.helpItems}>
+                        <Pressable onPress={() => setOpenItem(openItem === 8 ? null : 8)} style={styles.lastHelpItem}>
                             <View style={styles.topic}>
                                 <Text style={styles.helpItemsText}>Accessibility</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
@@ -242,6 +242,11 @@ const styles = StyleSheet.create({
     helpItems: {
         borderBottomWidth: 1,
         borderBottomColor: "gray",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    lastHelpItem:{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
