@@ -92,7 +92,8 @@ export default function Index() {
       .then(res => res.json())
       .then(data => {
         setNotes(prev => prev.filter(note => note.id !== id));
-        setArchivedNotes(prev => [...prev, data])
+        const archived = notes.find(note => note.id === id);
+        setArchivedNotes(prev => [...prev, archived])
         setArchiveShown(true)
       })
   }
