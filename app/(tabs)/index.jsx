@@ -33,8 +33,7 @@ export default function Login() {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.helpHeader}>
-                <Image source={require("../../assets/images/close.png")}></Image>
-                <Text style={styles.pageTitle}>Oturum açın</Text>
+                <Text style={styles.pageTitle}>Oturum açın - Google Hesapları</Text>
             </View>
             <View>
                 <View style={styles.mainContainer}>
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     pageTitle: {
         color: "white",
         fontWeight: 600,
-        fontSize: 20
+        fontSize: 18
     },
     mainContainer: {
         display: "flex",

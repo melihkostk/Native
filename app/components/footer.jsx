@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 export default function Footer(props) {
@@ -10,9 +11,9 @@ export default function Footer(props) {
                 <View style={styles.footerLinks}>
                     <Image source={require("../../assets/images/mic.png")}></Image>
                 </View>
-                <View style={styles.footerLinks}>
+                <Link href={"/cameraPage"} style={styles.footerLinks}>
                     <Image source={require("../../assets/images/img.png")}></Image>
-                </View>
+                </Link>
             </View>
             <Pressable onPress={() => props.setNoteInputShown(prev => !prev)} style={styles.plusButton}>
                 <View>

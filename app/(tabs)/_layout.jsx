@@ -51,6 +51,13 @@ export default function TabsLayout() {
             headerShown: false,
           }}
         />
+        <Tabs.Screen
+          name="camera"
+          options={{
+            title: "Kamera",
+            headerShown: false,
+          }}
+        />
       </Tabs>
     </NotesProvider>
   );
