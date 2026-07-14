@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { useRef } from "react";
-import { Animated, Dimensions, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, Image, PanResponder, SafeAreaView, StyleSheet, Text, View } from "react-native";
 const { height } = Dimensions.get('window');
 
 export default function Sidebar(props) {
@@ -81,18 +81,18 @@ export default function Sidebar(props) {
                     </Link>
                 </View>
                 <View style={styles.thirdSection}>
-                    <Pressable style={styles.linkContainer}>
+                    <Link href={"/settings"} style={styles.linkContainer}>
                         <View style={styles.linkImage}>
                             <Image source={require("../../assets/images/gray-settings.png")}></Image>
-                            <Link style={styles.links} href={"/settings"}>Ayarlar</Link>
+                            <Text style={styles.links}>Ayarlar</Text>
                         </View>
-                    </Pressable>
-                    <Pressable style={styles.linkContainer}>
+                    </Link>
+                    <Link href={"/help"} style={styles.linkContainer}>
                         <View style={styles.linkImage}>
                             <Image source={require("../../assets/images/gray-help.png")}></Image>
-                            <Link style={styles.links} href={"/help"}>Yardım</Link>
+                            <Text style={styles.links}>Yardım</Text>
                         </View>
-                    </Pressable>
+                    </Link>
                 </View>
             </AnimatedSafeAreaView>)
     )

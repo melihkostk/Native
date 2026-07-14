@@ -99,7 +99,7 @@ export default function Index() {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
       {noteInputShown && <NoteInput fixed={fixed} setFixed={setFixed} color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
       <Sidebar page="home" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
       <View style={styles.container}>

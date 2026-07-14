@@ -72,7 +72,7 @@ export default function Deleted() {
     }, [deletedInfo])
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
             <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>

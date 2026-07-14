@@ -53,7 +53,7 @@ export default function Archived() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
             <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar page="archived" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
