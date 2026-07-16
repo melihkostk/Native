@@ -58,8 +58,10 @@ export default function App() {
                         <Text style={[styles.zoomOptionsText , zoom === 3 && styles.activeZoomText]}>{zoom === 3 ? "3x" : "3"}</Text>
                     </Pressable>
                 </View>}
-                {facing === "front" && <View style={styles.zoomOptionsContainer}>
-                    <Image source={require("../../assets/images/expand.png")}></Image>
+                {facing === "front" && <View style={styles.appendContainer}>
+                    <Pressable>
+                        <Image source={require("../../assets/images/expand.png")}></Image>
+                    </Pressable>
                 </View>}
             </View>
             <View style={styles.buttonContainer}>
@@ -234,5 +236,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center"
+    },
+    appendContainer:{
+        position: "absolute",
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
+        bottom: 190,
+        left: '55%',
+        transform: [{ translateX: -30 }],
+        display: "flex",
+        flexDirection: "row",
+        gap:10,
+        padding: 6,
+        borderRadius: 40,
+        alignItems:"center"
     }
 });
