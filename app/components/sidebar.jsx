@@ -60,22 +60,19 @@ export default function Sidebar(props) {
                 <View style={styles.secondSection}>
                     <Link href={"/home"} style={[styles.linkContainer, props.page === "home" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
-                            {props.page !== "home" && <Image source={require("../../assets/images/gray-bulb.png")}></Image>}
-                            {props.page === "home" && <Image source={require("../../assets/images/blue-bulb.png")}></Image>}
+                            <Image source={props.page === "home" ? require("../../assets/images/blue-bulb.png") : require("../../assets/images/gray-bulb.png")}/>
                             <Text style={[styles.links, props.page === "home" && styles.activeLink]}>Notlar</Text>
                         </View>
                     </Link>
                     <Link href={"/archived"} style={[styles.linkContainer, props.page === "archived" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
-                            {props.page !== "archived" && <Image source={require("../../assets/images/gray-archive.png")}></Image>}
-                            {props.page === "archived" && <Image source={require("../../assets/images/blue-archive.png")}></Image>}
+                            <Image source={props.page === "archived" ? require("../../assets/images/blue-archive.png") : require("../../assets/images/gray-archive.png")}/>
                             <Text style={[styles.links, props.page === "archived" && styles.activeLink]}>Arşiv</Text>
                         </View>
                     </Link>
                     <Link href={"/deleted"} style={[styles.linkContainer, props.page === "deleted" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
-                            {props.page !== "deleted" && <Image source={require("../../assets/images/gray-delete.png")}></Image>}
-                            {props.page === "deleted" && <Image source={require("../../assets/images/blue-delete.png")}></Image>}
+                            <Image source={props.page === "deleted" ? require("../../assets/images/blue-delete.png") : require("../../assets/images/gray-delete.png")}/>
                             <Text style={[styles.links, props.page === "deleted" && styles.activeLink]}>Çöp Kutusu</Text>
                         </View>
                     </Link>

@@ -303,7 +303,8 @@ const styles = StyleSheet.create({
     searchIcon: {
         position: "absolute",
         top: 13,
-        left: 12
+        left: 12,
+        zIndex:10
     },
     clearIcon: {
         position: "absolute",
