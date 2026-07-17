@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 0,
         backgroundColor: "white",
-        zIndex: 50,
+        zIndex: 120,
         height: height,
         width: "70%",
         padding: 8,
