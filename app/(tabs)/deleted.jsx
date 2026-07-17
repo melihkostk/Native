@@ -94,20 +94,8 @@ export default function Deleted() {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             {sidebarShown && <View style={{flex:1 , backgroundColor:"rgba(0,0,0,0.4)" , position:"absolute" , top:0 , right:0 , left:0 , bottom:0 , zIndex:100}}></View>}
-            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
-            <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
-            <View style={styles.mainContainer}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
-                    <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
-                        <Text style={[styles.deleteAll, deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
-                    </Pressable>
-                </View>
-                {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
-                    <Image source={require("../../assets/images/delete.png")}></Image>
-                    <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
-                </View>}
-                {deleteWarning && deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
+            {deleteWarning && <View style={{flex:1 , backgroundColor:"rgba(0,0,0,0.4)" , position:"absolute" , top:0 , right:0 , left:0 , bottom:0 , zIndex:100}}></View>}
+            {deleteWarning && deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
                     <View>
                         <Text style={styles.warningTitle}>Çöp Kutusu boşaltılsın mı ? </Text>
                     </View>
@@ -123,6 +111,20 @@ export default function Deleted() {
                         </Pressable>
                     </View>
                 </View>}
+            <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
+            <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
+            <View style={styles.mainContainer}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
+                    <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
+                        <Text style={[styles.deleteAll, deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
+                    </Pressable>
+                </View>
+                {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
+                    <Image source={require("../../assets/images/delete.png")}></Image>
+                    <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
+                </View>}
+                
                 <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
                     <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
                         {deletedNotes.map((item) => (
@@ -225,9 +227,10 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 8,
         position: "absolute",
-        zIndex: 50,
+        zIndex: 120,
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3)",
         top: "30%",
+        left:"2.5%"
 
     },
     warningTitle: {
