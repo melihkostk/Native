@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import 'react-native-gesture-handler';
 import Footer from "../components/footer";
 import Note from "../components/note";
@@ -31,6 +31,7 @@ export default function Index() {
   const [archiveShown, setArchiveShown] = React.useState(false);
   const [flexCol, setFlexCol] = React.useState(true);
   const [fixed, setFixed] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes", {
@@ -40,7 +41,11 @@ export default function Index() {
       .then(data => {
         setNotes(data)
       })
+      .finally(() => {
+        setLoading(false)
+      })
   }, [])
+
 
   React.useEffect(() => {
     if (!deletedShown) return;
@@ -98,9 +103,25 @@ export default function Index() {
       })
   }
 
+  if (loading) {
+    return (
+      <SafeAreaView
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "white",
+        }}
+      >
+        <ActivityIndicator size="large" color="#1A73E8" />
+        <Text>Yükleniyor...</Text>
+      </SafeAreaView>
+    );
+  }
+
 
   return (
-    <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       {noteInputShown && <NoteInput fixed={fixed} setFixed={setFixed} color={color} setColor={setColor} notes={notes} setNotes={setNotes} title={title} setTitle={setTitle} description={description} setDescription={setDescription} setNoteInputShown={setNoteInputShown} />}
       <Sidebar page="home" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
       <View style={styles.container}>

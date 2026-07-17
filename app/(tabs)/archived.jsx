@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/header";
 import Note from "../components/note";
 import Sidebar from "../components/sidebar";
@@ -8,13 +8,18 @@ const { height } = Dimensions.get('window');
 
 export default function Archived() {
 
+    const [loading, setLoading] = React.useState(true);
+
     React.useEffect(() => {
-        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list" , {
-            method:"GET"
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/archived/list", {
+            method: "GET"
         })
             .then(res => res.json())
             .then(data => {
                 setArchivedNotes(data)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [])
 
@@ -52,8 +57,24 @@ export default function Archived() {
         })
     }
 
+    if (loading) {
+        return (
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "white",
+                }}
+            >
+                <ActivityIndicator size="large" color="#1A73E8" />
+                <Text>Yükleniyor...</Text>
+            </SafeAreaView>
+        );
+    }
+
     return (
-        <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <Header setSiderbarShown={setSiderbarShown} title="Arşiv" searchShown="true" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar page="archived" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>

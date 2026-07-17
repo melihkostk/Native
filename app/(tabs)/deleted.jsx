@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import Header from "../components/header";
 import Note from "../components/note";
 import Sidebar from "../components/sidebar";
@@ -15,17 +15,21 @@ export default function Deleted() {
     const [deletedInfo, setDeletedInfo] = React.useState(false)
     const [flexCol, setFlexCol] = React.useState(true);
     const [ID, setID] = React.useState([])
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list" , {
-            method:"GET"
+        fetch("https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/deleted/list", {
+            method: "GET"
         })
             .then(res => res.json())
             .then(data => {
                 setDeletedNotes(data)
                 setID(data.map(item => item.id));
             })
-    },[])
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [])
 
     function deletePerma(id) {
         fetch(`https://demo.pigasoft.com/intern/melih-kostak/note/public/api/notes/${id}`, {
@@ -71,8 +75,24 @@ export default function Deleted() {
         return () => clearTimeout(timer)
     }, [deletedInfo])
 
+    if (loading) {
+        return (
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "white",
+                }}
+            >
+                <ActivityIndicator size="large" color="#1A73E8" />
+                <Text>Yükleniyor...</Text>
+            </SafeAreaView>
+        );
+    }
+
     return (
-        <SafeAreaView style={{ flex: 1 , backgroundColor:"white" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <Header setSiderbarShown={setSiderbarShown} title="Çöp Kutusu" searchShown="false" flexCol={flexCol} setFlexCol={setFlexCol} />
             <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
