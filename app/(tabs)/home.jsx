@@ -131,7 +131,7 @@ export default function Index() {
             <Pressable onPress={() => setSiderbarShown(prev => !prev)}>
               <Image source={require("../../assets/images/menu-icon.png")}></Image>
             </Pressable>
-            <TextInput value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
+            <TextInput placeholderTextColor={"#5F6368"} value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
           </View>
           <View style={styles.noteInputRight}>
             <Pressable onPress={() => setFlexCol(prev => !prev)}>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "#fff",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 0.5 },
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 4,
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 8
+    gap: 20
   },
   noteInputText: {
     color: "#202124",

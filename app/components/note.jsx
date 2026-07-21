@@ -77,9 +77,9 @@ export default function Note(props) {
 const styles = StyleSheet.create({
     note: {
         borderWidth: 1,
-        borderColor: "#8E8E8F",
+        borderColor: "#e0e0e0",
         padding: 6,
-        paddingBottom: 26,
+        paddingBottom: 12,
         borderRadius: 8,
         width: "95%",
     },
@@ -88,9 +88,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 600,
-        fontSize: 16
+        fontSize: 16,
+        color:"#4A4A4A"
     },
     desciption: {
-        fontSize: 15
+        fontSize: 15,
+        color:"#7A7A7A",
+        marginTop:5
+        
     }
 })
