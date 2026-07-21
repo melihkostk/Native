@@ -1,6 +1,7 @@
 import { Link } from "expo-router";
 import { useRef } from "react";
-import { Animated, Dimensions, Image, PanResponder, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, Image, PanResponder, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const { height } = Dimensions.get('window');
 
 export default function Sidebar(props) {

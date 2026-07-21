@@ -1,6 +1,7 @@
 import React from "react";
-import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import 'react-native-gesture-handler';
+import { SafeAreaView } from "react-native-safe-area-context";
 import Footer from "../components/footer";
 import Note from "../components/note";
 import NoteInput from "../components/noteInput";

@@ -1,5 +1,6 @@
 import React from "react";
-import { Animated, Image, PanResponder, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Image, PanResponder, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function NoteInput(props) {
     const [moreShown, setMoreShown] = React.useState(false);

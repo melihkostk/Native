@@ -1,5 +1,6 @@
 import React from "react";
-import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/header";
 import Note from "../components/note";
 import Sidebar from "../components/sidebar";
