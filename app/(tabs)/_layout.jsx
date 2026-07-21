@@ -52,7 +52,7 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="camera"
+          name="cameraPage"
           options={{
             title: "Kamera",
             headerShown: false,

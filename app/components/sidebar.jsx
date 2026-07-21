@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
         zIndex: 120,
         height: height,
         width: "70%",
-        padding: 8,
         top: 0,
         bottom: 0,
         borderRightWidth: 1,
