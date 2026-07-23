@@ -1,5 +1,6 @@
 import { Link } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Help() {
@@ -8,6 +9,7 @@ export default function Help() {
     const [languagesShown, setLanguagesShown] = React.useState(false)
     const [scrollEnabled, setScrollEnabled] = React.useState(true);
     const [language , setLanguage] = React.useState("Türkçe")
+    const { t } = useTranslation();
 
     return (
         <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
@@ -18,7 +20,7 @@ export default function Help() {
                     </Link>
                 </View>
                 <View>
-                    <Text style={styles.keepTitle}>Google Keep Yardım</Text>
+                    <Text style={styles.keepTitle}>{t("help.title")}</Text>
                 </View>
             </View>
             <ScrollView scrollEnabled={scrollEnabled} contentContainerStyle={styles.mainContainer}>
@@ -26,10 +28,10 @@ export default function Help() {
                     <View style={styles.keepIcon}>
                         <Image style={styles.keepIconImage} source={require("../../assets/images/keep.png")}></Image>
                     </View>
-                    <Text style={styles.questionText}>Size nasıl yardımcı olabiliriz ?</Text>
+                    <Text style={styles.questionText}>{t("help.question")}</Text>
                     <View style={styles.inputContainer}>
                         <Image style={styles.searchIcon} source={require("../../assets/images/search.png")}></Image>
-                        <TextInput onChangeText={setInput} value={input} style={styles.questionInput} placeholder="Sorununuzu açıklayın"></TextInput>
+                        <TextInput onChangeText={setInput} value={input} style={styles.questionInput} placeholder={t("help.placeholder")}></TextInput>
                         {input.length > 0 && (
                             <Pressable onPress={() => setInput("")} style={styles.clearIcon}>
                                 <Image source={require("../../assets/images/close.png")}></Image>
@@ -38,11 +40,11 @@ export default function Help() {
                     </View>
                 </View>
                 <View style={styles.helpContainer}>
-                    <Text style={styles.helpItemsTitle}>Yardım konularına göz at</Text>
+                    <Text style={styles.helpItemsTitle}>{t("help.topicTitle")}</Text>
                     <View style={styles.helpItemsContainer}>
                         <Pressable onPress={() => setOpenItem(openItem === 1 ? null : 1)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Google Keep kullanmaya başlama</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t1")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 1 && (<View style={styles.subItem}>
@@ -55,7 +57,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 2 ? null : 2)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Not ve liste oluşturma ve düzenleme</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t2")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 2 && (<View style={styles.subItem}>
@@ -68,7 +70,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 3 ? null : 3)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Notları ve listeleri organize etme</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t3")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 3 && (<View style={styles.subItem}>
@@ -80,7 +82,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 4 ? null : 4)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Not ve liste arama ve paylaşma</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t4")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 4 && (<View style={styles.subItem}>
@@ -94,7 +96,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 5 ? null : 5)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Hatırlatıcı oluşturma</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t5")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 5 && (<View style={styles.subItem}>
@@ -104,7 +106,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 6 ? null : 6)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Araçlar ve sorun giderme</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t6")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 6 && (<View style={styles.subItem}>
@@ -114,7 +116,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 7 ? null : 7)} style={styles.helpItems}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Gemini in Keep</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t7")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 7 && (<View style={styles.subItem}>
@@ -130,7 +132,7 @@ export default function Help() {
                         </Pressable>
                         <Pressable onPress={() => setOpenItem(openItem === 8 ? null : 8)} style={styles.lastHelpItem}>
                             <View style={styles.topic}>
-                                <Text style={styles.helpItemsText}>Accessibility</Text>
+                                <Text style={styles.helpItemsText}>{t("help.t8")}</Text>
                                 <Image source={require("../../assets/images/down-arrow.png")}></Image>
                             </View>
                             {openItem === 8 && (<View style={styles.subItem}>
@@ -142,26 +144,26 @@ export default function Help() {
                 <View style={styles.moreInfoContainer}>
                     <View style={styles.moreInfoTitle}>
                         <Text style={styles.moreHelp}>
-                            Daha fazla yardıma mı ihtiyacınız var ?
+                            {t("help.needMore")}
                         </Text>
                         <Text style={styles.steps}>
-                            Bir sonraki adımları deneyin
+                            {t("help.nextStep")}
                         </Text>
                     </View>
                     <View style={styles.communityContainer}>
                         <View>
                             <Text style={styles.helpItemsText}>
-                                Yardım topluluğunda yayınlayın
+                                {t("help.publish")}
                             </Text>
                             <Text>
-                                Topluluk üyelerinden sorularınıza cevap alın
+                                {t("help.getAnswer")}
                             </Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.langMenu}>
                     <Pressable onPress={() => {setLanguagesShown(prev => !prev); setScrollEnabled(false)}} style={styles.languageSelect}>
-                        <Text style={styles.languageTitle}>Dil</Text>
+                        <Text style={styles.languageTitle}>{t("help.language")}</Text>
                         <Text style={styles.language}>{language}</Text>
                         <Image source={require("../../assets/images/down-arrow.png")}></Image>
                     </Pressable>
@@ -396,7 +398,7 @@ const styles = StyleSheet.create({
         height: "85%",
         borderRadius: 8,
         boxShadow: '0px 4px 12px rgba(0,0,0,0.4)',
-        paddingTop:15
+        paddingTop:230
     },
     lang: {
         padding: 15

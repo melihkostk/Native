@@ -1,6 +1,9 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { useTranslation } from "react-i18next";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Header(props) {
+    const { t } = useTranslation();
+    
     return (
         <View style={styles.headerContainer}>
             <View>

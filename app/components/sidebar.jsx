@@ -1,10 +1,12 @@
 import { Link } from "expo-router";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Animated, Dimensions, Image, PanResponder, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const { height } = Dimensions.get('window');
 
 export default function Sidebar(props) {
+    const { t } = useTranslation();
 
     const pan = useRef(new Animated.ValueXY()).current;
     const AnimatedSafeAreaView =
@@ -62,19 +64,19 @@ export default function Sidebar(props) {
                     <Link href={"/home"} style={[styles.linkContainer, props.page === "home" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
                             <Image source={props.page === "home" ? require("../../assets/images/blue-bulb.png") : require("../../assets/images/gray-bulb.png")}/>
-                            <Text style={[styles.links, props.page === "home" && styles.activeLink]}>Notlar</Text>
+                            <Text style={[styles.links, props.page === "home" && styles.activeLink]}>{t("sidebar.notes")}</Text>
                         </View>
                     </Link>
                     <Link href={"/archived"} style={[styles.linkContainer, props.page === "archived" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
                             <Image source={props.page === "archived" ? require("../../assets/images/blue-archive.png") : require("../../assets/images/gray-archive.png")}/>
-                            <Text style={[styles.links, props.page === "archived" && styles.activeLink]}>Arşiv</Text>
+                            <Text style={[styles.links, props.page === "archived" && styles.activeLink]}>{t("sidebar.archive")}</Text>
                         </View>
                     </Link>
                     <Link href={"/deleted"} style={[styles.linkContainer, props.page === "deleted" && styles.activeLinkContainer]}>
                         <View style={styles.linkImage}>
                             <Image source={props.page === "deleted" ? require("../../assets/images/blue-delete.png") : require("../../assets/images/gray-delete.png")}/>
-                            <Text style={[styles.links, props.page === "deleted" && styles.activeLink]}>Çöp Kutusu</Text>
+                            <Text style={[styles.links, props.page === "deleted" && styles.activeLink]}>{t("sidebar.deleted")}</Text>
                         </View>
                     </Link>
                 </View>
@@ -82,13 +84,13 @@ export default function Sidebar(props) {
                     <Link href={"/settings"} style={styles.linkContainer}>
                         <View style={styles.linkImage}>
                             <Image source={require("../../assets/images/gray-settings.png")}></Image>
-                            <Text style={styles.links}>Ayarlar</Text>
+                            <Text style={styles.links}>{t("sidebar.settings")}</Text>
                         </View>
                     </Link>
                     <Link href={"/help"} style={styles.linkContainer}>
                         <View style={styles.linkImage}>
                             <Image source={require("../../assets/images/gray-help.png")}></Image>
-                            <Text style={styles.links}>Yardım</Text>
+                            <Text style={styles.links}>{t("sidebar.help")}</Text>
                         </View>
                     </Link>
                 </View>

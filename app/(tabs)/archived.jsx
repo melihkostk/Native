@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/header";
@@ -8,6 +9,7 @@ import { useNotes } from "../context/NotesContext";
 const { height } = Dimensions.get('window');
 
 export default function Archived() {
+    const { t } = useTranslation()
 
     const [loading, setLoading] = React.useState(true);
 
@@ -82,7 +84,7 @@ export default function Archived() {
             <View style={styles.mainContainer}>
                 {archivedNotes && archivedNotes.length === 0 && <View style={styles.infoContainer}>
                     <Image style={styles.infoImage} source={require("../../assets/images/archive.png")}></Image>
-                    <Text style={styles.infoText}>Arşivlenen notlarınız burada görünür</Text>
+                    <Text style={styles.infoText}>{t("archived.pageInfo")}</Text>
                 </View>}
                 <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
                     <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
@@ -101,7 +103,7 @@ export default function Archived() {
                     </View>
                 </ScrollView>
                 {unArchive && <View style={styles.deletedInfo}>
-                    <Text style={styles.deletedInfoText}>Not arşivden çıkarıldı</Text>
+                    <Text style={styles.deletedInfoText}>{t("archived.unArchive")}</Text>
                 </View>}
             </View>
         </SafeAreaView>

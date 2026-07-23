@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/header";
@@ -9,6 +10,7 @@ const { height } = Dimensions.get('window');
 
 export default function Deleted() {
 
+    const { t } = useTranslation()
     const { deletedNotes, setDeletedNotes, setNotes } = useNotes();
     const [sidebarShown, setSiderbarShown] = React.useState(false)
     const [deleteWarning, setDeleteWarning] = React.useState(false)
@@ -98,17 +100,17 @@ export default function Deleted() {
             {deleteWarning && <View style={{flex:1 , backgroundColor:"rgba(0,0,0,0.4)" , position:"absolute" , top:0 , right:0 , left:0 , bottom:0 , zIndex:100}}></View>}
             {deleteWarning && deletedNotes.length > 0 && <View style={styles.deleteWarningContainer}>
                     <View>
-                        <Text style={styles.warningTitle}>Çöp Kutusu boşaltılsın mı ? </Text>
+                        <Text style={styles.warningTitle}>{t("deleted.question")}</Text>
                     </View>
                     <View>
-                        <Text style={styles.warningMessage}>Çöp Kutusundaki tüm notlar kalısı olarak silinecektir.</Text>
+                        <Text style={styles.warningMessage}>{t("deleted.description")}</Text>
                     </View>
                     <View style={styles.deleteButtonsContainer}>
                         <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
-                            <Text style={styles.deleteButtons}>İptal</Text>
+                            <Text style={styles.deleteButtons}>{t("deleted.cancelDelete")}</Text>
                         </Pressable>
                         <Pressable onPress={() => { deleteAll(); setDeleteWarning(prev => !prev) }}>
-                            <Text style={styles.deleteButtons}>Çöp Kutusu`nu boşalt</Text>
+                            <Text style={styles.deleteButtons}>{t("deleted.delete")}</Text>
                         </Pressable>
                     </View>
                 </View>}
@@ -116,14 +118,14 @@ export default function Deleted() {
             <Sidebar page="deleted" sidebarShown={sidebarShown} setSiderbarShown={setSiderbarShown} />
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Çöp Kutusundaki notlar 7 gün sonra silinir.</Text>
+                    <Text style={styles.title}>{t("deleted.dateInfo")}</Text>
                     <Pressable onPress={() => setDeleteWarning(prev => !prev)}>
-                        <Text style={[styles.deleteAll, deletedNotes.length > 0 && styles.activeDeleteAll]}>Çöp Kutusunu Boşalt</Text>
+                        <Text style={[styles.deleteAll, deletedNotes.length > 0 && styles.activeDeleteAll]}>{t("deleted.deleteAllButton")}</Text>
                     </Pressable>
                 </View>
                 {deletedNotes && deletedNotes.length === 0 && <View style={styles.infoContainer}>
                     <Image source={require("../../assets/images/delete.png")}></Image>
-                    <Text style={styles.infoText}>Çöp Kutusunda not yok</Text>
+                    <Text style={styles.infoText}>{t("deleted.pageInfo")}</Text>
                 </View>}
                 
                 <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
@@ -146,10 +148,10 @@ export default function Deleted() {
                     </View>
                 </ScrollView>
                 {savedInfo && <View style={styles.deletedInfo}>
-                    <Text style={styles.deletedInfoText}>Not geri yüklendi</Text>
+                    <Text style={styles.deletedInfoText}>{t("deleted.restoreDelete")}</Text>
                 </View>}
                 {deletedInfo && <View style={styles.deletedInfo}>
-                    <Text style={styles.deletedInfoText}>Not kalıcı olarak silindi</Text>
+                    <Text style={styles.deletedInfoText}>{t("deleted.deletedInfo")}</Text>
                 </View>}
             </View>
         </SafeAreaView>

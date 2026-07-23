@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import 'react-native-gesture-handler';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,7 +13,7 @@ import { useNotes } from "../context/NotesContext";
 const { height } = Dimensions.get('window');
 
 export default function Index() {
-
+  const { t } = useTranslation()
   const {
     notes,
     setNotes,
@@ -132,7 +133,7 @@ export default function Index() {
             <Pressable onPress={() => setSiderbarShown(prev => !prev)}>
               <Image source={require("../../assets/images/menu-icon.png")}></Image>
             </Pressable>
-            <TextInput placeholderTextColor={"#5F6368"} value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText} placeholder="Notlarınızda arayın"></TextInput>
+            <TextInput placeholderTextColor={"#5F6368"} value={searchInput} onChangeText={setSearchInput} style={styles.noteInputText}  placeholder={t("home.placeholder")}></TextInput>
           </View>
           <View style={styles.noteInputRight}>
             <Pressable onPress={() => setFlexCol(prev => !prev)}>
@@ -145,7 +146,7 @@ export default function Index() {
         </View>
         {notes.length === 0 && <View style={styles.infoContainer}>
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
-          <Text style={styles.title}>Eklediğiniz notlar burada görünür</Text>
+          <Text style={styles.title}>{t("home.pageInfo")}</Text>
         </View>}
         <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
           <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
@@ -185,10 +186,10 @@ export default function Index() {
           </View>
         </ScrollView>
         {deletedShown && <View style={styles.deletedInfo}>
-          <Text style={styles.deletedInfoText}>Not çöp kutusuna taşındı</Text>
+          <Text style={styles.deletedInfoText}>{t("home.deleteInfo")}</Text>
         </View>}
         {archiveShown && <View style={styles.deletedInfo}>
-          <Text style={styles.deletedInfoText}>Not arşivlendi</Text>
+          <Text style={styles.deletedInfoText}>{t("home.archiveInfo")}</Text>
         </View>}
       </View>
       <Footer setNoteInputShown={setNoteInputShown} />
