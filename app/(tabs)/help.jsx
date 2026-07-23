@@ -5,6 +5,8 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 
 export default function Help() {
     const [input, setInput] = React.useState("")
     const [openItem, setOpenItem] = React.useState(null);
+    const [languagesShown, setLanguagesShown] = React.useState(false)
+    const [scrollEnabled, setScrollEnabled] = React.useState(true);
 
     return (
         <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
@@ -18,7 +20,7 @@ export default function Help() {
                     <Text style={styles.keepTitle}>Google Keep Yardım</Text>
                 </View>
             </View>
-            <ScrollView contentContainerStyle={styles.mainContainer}>
+            <ScrollView scrollEnabled={scrollEnabled} contentContainerStyle={styles.mainContainer}>
                 <View style={styles.container}>
                     <View style={styles.keepIcon}>
                         <Image style={styles.keepIconImage} source={require("../../assets/images/keep.png")}></Image>
@@ -155,10 +157,96 @@ export default function Help() {
                             </Text>
                         </View>
                     </View>
-                    <View>
-
-                    </View>
                 </View>
+                <View style={styles.langMenu}>
+                    <Pressable onPress={() => {setLanguagesShown(prev => !prev); setScrollEnabled(false)}} style={styles.languageSelect}>
+                        <Text style={styles.languageTitle}>Dil</Text>
+                        <Text style={styles.language}>Türkçe</Text>
+                        <Image source={require("../../assets/images/down-arrow.png")}></Image>
+                    </Pressable>
+                    <Pressable onPress={() => {setLanguagesShown(prev => !prev); setScrollEnabled(true)}}>
+                        <Image style={styles.darkIcon} source={require("../../assets/images/dark.png")}></Image>
+                    </Pressable>
+                </View>
+                {languagesShown && <View style={styles.languagesMenu}>
+                    <ScrollView>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Deutch</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>English</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                        <View style={styles.lang}>
+                            <Text>Türkçe</Text>
+                        </View>
+                    </ScrollView>
+                </View>}
             </ScrollView>
         </View>
     )
@@ -215,7 +303,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: "100%",
-        
+
     },
     questionInput: {
         borderWidth: 1,
@@ -246,7 +334,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center"
     },
-    lastHelpItem:{
+    lastHelpItem: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
@@ -257,7 +345,7 @@ const styles = StyleSheet.create({
     },
     helpItemsText: {
         fontWeight: "600",
-        fontSize:15
+        fontSize: 15
     },
     moreInfoContainer: {
         display: "flex",
@@ -284,11 +372,11 @@ const styles = StyleSheet.create({
     },
     moreHelp: {
         fontSize: 18,
-        textAlign:"center"
+        textAlign: "center"
     },
-    steps:{
+    steps: {
         fontSize: 14,
-        textAlign:"center"
+        textAlign: "center"
     },
     keepTitle: {
         color: "white",
@@ -304,7 +392,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 13,
         left: 12,
-        zIndex:10
+        zIndex: 10
     },
     clearIcon: {
         position: "absolute",
@@ -322,6 +410,61 @@ const styles = StyleSheet.create({
     },
     subItemText: {
         paddingVertical: 10
+    },
+    langMenu: {
+        marginTop: 40,
+        width: "100%",
+        maxWidth:"95%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        paddingBottom: 30
+    },
+    languageSelect: {
+        borderWidth: 2.5,
+        borderColor: "#B0B0B0",
+        padding: 10,
+        paddingVertical: 13,
+        position: "relative",
+        borderRadius: 6,
+        width: "35%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row"
+    },
+    languageTitle: {
+        position: "absolute",
+        top: -10,
+        left: 12,
+        backgroundColor: "white",
+        fontSize: 13,
+        color: "#2E2E2E",
+        paddingHorizontal: 4
+    },
+    language: {
+        color: "#4A4A4A"
+    },
+    darkIcon: {
+        width: 30,
+        height: 30
+    },
+    languagesMenu: {
+        position: "absolute",
+        backgroundColor: "#fff",
+        top: 0,
+        bottom: 3,
+        left: 20,
+        width: "50%",
+        zIndex: 100,
+        height: "100%",
+        borderRadius: 8,
+        boxShadow: '0px 4px 12px rgba(0,0,0,0.4)',
+        paddingTop:120
+    },
+    lang: {
+        padding: 15
     }
 
 })
