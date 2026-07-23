@@ -7,6 +7,7 @@ export default function Help() {
     const [openItem, setOpenItem] = React.useState(null);
     const [languagesShown, setLanguagesShown] = React.useState(false)
     const [scrollEnabled, setScrollEnabled] = React.useState(true);
+    const [language , setLanguage] = React.useState("Türkçe")
 
     return (
         <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
@@ -161,90 +162,24 @@ export default function Help() {
                 <View style={styles.langMenu}>
                     <Pressable onPress={() => {setLanguagesShown(prev => !prev); setScrollEnabled(false)}} style={styles.languageSelect}>
                         <Text style={styles.languageTitle}>Dil</Text>
-                        <Text style={styles.language}>Türkçe</Text>
+                        <Text style={styles.language}>{language}</Text>
                         <Image source={require("../../assets/images/down-arrow.png")}></Image>
                     </Pressable>
-                    <Pressable onPress={() => {setLanguagesShown(prev => !prev); setScrollEnabled(true)}}>
+                    <Pressable>
                         <Image style={styles.darkIcon} source={require("../../assets/images/dark.png")}></Image>
                     </Pressable>
                 </View>
                 {languagesShown && <View style={styles.languagesMenu}>
-                    <ScrollView>
-                        <View style={styles.lang}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <Pressable onPress={() => {setLanguage("Deutch"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Deutch" && styles.selectedLang]}>
                             <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
+                        </Pressable>
+                        <Pressable onPress={() => {setLanguage("English"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "English" && styles.selectedLang]}>
                             <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
+                        </Pressable>
+                        <Pressable onPress={() => {setLanguage("Türkçe"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Türkçe" && styles.selectedLang]}>
                             <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Deutch</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>English</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
-                        <View style={styles.lang}>
-                            <Text>Türkçe</Text>
-                        </View>
+                        </Pressable>
                     </ScrollView>
                 </View>}
             </ScrollView>
@@ -453,18 +388,21 @@ const styles = StyleSheet.create({
     languagesMenu: {
         position: "absolute",
         backgroundColor: "#fff",
-        top: 0,
-        bottom: 3,
+        top: 115,
+        bottom: 0,
         left: 20,
         width: "50%",
         zIndex: 100,
-        height: "100%",
+        height: "85%",
         borderRadius: 8,
         boxShadow: '0px 4px 12px rgba(0,0,0,0.4)',
-        paddingTop:120
+        paddingTop:15
     },
     lang: {
         padding: 15
+    },
+    selectedLang:{
+        backgroundColor:"#EEDEC5"
     }
 
 })
