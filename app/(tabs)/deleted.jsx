@@ -128,7 +128,7 @@ export default function Deleted() {
                     <Text style={styles.infoText}>{t("deleted.pageInfo")}</Text>
                 </View>}
                 
-                <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
                     <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
                         {deletedNotes.map((item) => (
                             <Note

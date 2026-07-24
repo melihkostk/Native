@@ -148,7 +148,7 @@ export default function Index() {
           <Image style={styles.image} source={require("../../assets/images/bulb.png")}></Image>
           <Text style={styles.title}>{t("home.pageInfo")}</Text>
         </View>}
-        <ScrollView contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.notesContainer, !flexCol && styles.rowContainer]} style={styles.scrollContainer}>
           <View style={[styles.notesContainer, !flexCol && styles.rowContainer]}>
             {notes
               .filter((item) => {

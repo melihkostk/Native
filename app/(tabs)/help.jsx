@@ -24,9 +24,9 @@ export default function Help() {
                     <Text style={styles.keepTitle}>{t("help.title")}</Text>
                 </View>
             </View>
-            <ScrollView scrollEnabled={scrollEnabled} contentContainerStyle={styles.mainContainer}>
+            <ScrollView showsVerticalScrollIndicator={false} scrollEnabled={scrollEnabled} contentContainerStyle={styles.mainContainer}>
                 <View style={styles.container}>
-                    <View style={[styles.keepIcon , darkMode && styles.darkKeepIcon]}>
+                    <View style={[styles.keepIcon, darkMode && styles.darkKeepIcon]}>
                         <Image style={styles.keepIconImage} source={require("../../assets/images/keep.png")}></Image>
                     </View>
                     <Text style={[styles.questionText, darkMode && styles.darkQuestionText]}>{t("help.question")}</Text>
@@ -40,7 +40,7 @@ export default function Help() {
                         )}
                     </View>
                 </View>
-                <View style={[styles.hContainer , darkMode && styles.darkHContainer]}>
+                <View style={[styles.hContainer, darkMode && styles.darkHContainer]}>
                     <View style={styles.helpContainer}>
                         <Text style={[styles.helpItemsTitle, darkMode && styles.darkHelpItemsTitle]}>{t("help.topicTitle")}</Text>
                         <View style={styles.helpItemsContainer}>
@@ -49,12 +49,12 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t1")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 1 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep kullanma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep Chrome uzantısı kullanma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Liste, hatırlatıcı ve paylaşım ayarlarını değiştirme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep`i kullanmak için nelere ihtiyacınız var</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google ürünlerini yan yana kullanma</Text>
+                                {openItem === 1 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep kullanma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep Chrome uzantısı kullanma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Liste, hatırlatıcı ve paylaşım ayarlarını değiştirme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep`i kullanmak için nelere ihtiyacınız var</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google ürünlerini yan yana kullanma</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 2 ? null : 2)} style={styles.helpItems}>
@@ -62,12 +62,12 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t2")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 2 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Not oluşturma ve düzenleme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Liste yapın</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Resim not alma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Çizimi not olarak kaydetme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Crete a list with Gemini in Google Keep</Text>
+                                {openItem === 2 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Not oluşturma ve düzenleme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Liste yapın</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Resim not alma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Çizimi not olarak kaydetme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Crete a list with Gemini in Google Keep</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 3 ? null : 3)} style={styles.helpItems}>
@@ -75,25 +75,25 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t3")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 3 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Notlarınızı organize etme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Not ve liste arşivleme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Android ana ekranınızda not alma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Notların sürüm geçmişini bulma</Text>
+                                {openItem === 3 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Notlarınızı organize etme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Not ve liste arşivleme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Android ana ekranınızda not alma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Notların sürüm geçmişini bulma</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 4 ? null : 4)} style={styles.helpItems}>
                                 <View style={styles.topic}>
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t4")}</Text>
-                                   <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
+                                    <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 4 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Not ve liste arama</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Not, liste ve çizim paylaşma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Başka bir uygulamaya Keeo notu gönderme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Keep notunu aile grubunuzla paylaşma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Dokümanda veya sunuda Google Keep`i kullanma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep`teki verilerinizi dışa aktarma</Text>
+                                {openItem === 4 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Not ve liste arama</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Not, liste ve çizim paylaşma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Başka bir uygulamaya Keeo notu gönderme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Keep notunu aile grubunuzla paylaşma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Dokümanda veya sunuda Google Keep`i kullanma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep`teki verilerinizi dışa aktarma</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 5 ? null : 5)} style={styles.helpItems}>
@@ -101,9 +101,9 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t5")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 5 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Notlarınız için hatırlatıcılar oluşturma</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Hatırlatıcılar`daki verilerinizi dışarı aktarma</Text>
+                                {openItem === 5 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Notlarınız için hatırlatıcılar oluşturma</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Hatırlatıcılar`daki verilerinizi dışarı aktarma</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 6 ? null : 6)} style={styles.helpItems}>
@@ -111,9 +111,9 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t6")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 6 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep sorunlarını giderme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep için klavye kısayolları</Text>
+                                {openItem === 6 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep sorunlarını giderme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep için klavye kısayolları</Text>
                                 </View>)}
                             </Pressable>
                             <Pressable onPress={() => setOpenItem(openItem === 7 ? null : 7)} style={styles.helpItems}>
@@ -121,12 +121,12 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t7")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 7 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Create a list with AI in Google Keep</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Gemini ile Google Workspace`i kullanmaya başlama</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Gemini ile Google Workspace`te desteklenen diller</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Workspace uygulamalarında Gemini için kötüye kullanım bildirme</Text>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>
+                                {openItem === 7 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Create a list with AI in Google Keep</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Gemini ile Google Workspace`i kullanmaya başlama</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Gemini ile Google Workspace`te desteklenen diller</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Workspace uygulamalarında Gemini için kötüye kullanım bildirme</Text>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>
                                         Gemini ile Google Workspace, kullanıcıları kötü amaçlı içeriklere ve istem
                                         enjeksiyonuna karşı nasıl korur?
                                     </Text>
@@ -137,8 +137,8 @@ export default function Help() {
                                     <Text style={[styles.helpItemsText, darkMode && styles.darkHelpItemsText]}>{t("help.t8")}</Text>
                                     <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                                 </View>
-                                {openItem === 8 && (<View style={[styles.subItem , darkMode && styles.darkSubItem]}>
-                                    <Text style={[styles.subItemText , darkMode && styles.darkSubItemText]}>Google Keep`i ekran okuyucuyla kullanma</Text>
+                                {openItem === 8 && (<View style={[styles.subItem, darkMode && styles.darkSubItem]}>
+                                    <Text style={[styles.subItemText, darkMode && styles.darkSubItemText]}>Google Keep`i ekran okuyucuyla kullanma</Text>
                                 </View>)}
                             </Pressable>
                         </View>
@@ -164,9 +164,9 @@ export default function Help() {
                         </View>
                     </View>
                     <View style={styles.langMenu}>
-                        <Pressable onPress={() => { setLanguagesShown(prev => !prev); setScrollEnabled(false) }} style={[styles.languageSelect , darkMode && styles.darkLanguageSelect]}>
-                            <Text style={[styles.languageTitle , darkMode && styles.darkLanguageTitle]}>{t("help.language")}</Text>
-                            <Text style={[styles.language , darkMode && styles.darkLanguage]}>{language}</Text>
+                        <Pressable onPress={() => { setLanguagesShown(prev => !prev); setScrollEnabled(false) }} style={[styles.languageSelect, darkMode && styles.darkLanguageSelect]}>
+                            <Text style={[styles.languageTitle, darkMode && styles.darkLanguageTitle]}>{t("help.language")}</Text>
+                            <Text style={[styles.language, darkMode && styles.darkLanguage]}>{language}</Text>
                             <Image source={darkMode ? require("../../assets/images/orange-arrow.png") : require("../../assets/images/down-arrow.png")}></Image>
                         </Pressable>
                         <Pressable onPress={() => setDarkMode(prev => !prev)}>
@@ -197,12 +197,12 @@ const styles = StyleSheet.create({
     main: {
         flex: 1,
         backgroundColor: "white",
-        
+
     },
     darkMain: {
         flex: 1,
         backgroundColor: "black",
-        
+
     },
     mainContainer: {
         display: "flex",
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    darkKeepIcon:{
+    darkKeepIcon: {
         width: 45,
         height: 45,
         shadowColor: "#000",
@@ -255,13 +255,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingTop: 60
     },
-    darkHContainer:{
+    darkHContainer: {
         width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         paddingTop: 60,
-        backgroundColor:"#1e1e1e"
+        backgroundColor: "#1e1e1e"
     },
     keepIconImage: {
         width: 35,
@@ -293,7 +293,11 @@ const styles = StyleSheet.create({
 
     },
     questionInput: {
-        borderWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1.5 },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 4,
         borderColor: "gray",
         width: "100%",
         paddingVertical: 15,
@@ -337,12 +341,14 @@ const styles = StyleSheet.create({
         borderBottomColor: "gray",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        padding:4
     },
     lastHelpItem: {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        padding:4
     },
     helpItemsTitle: {
         paddingBottom: 15,
@@ -426,7 +432,7 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingHorizontal: 20,
     },
-    darkSubItem:{
+    darkSubItem: {
         backgroundColor: "#4C4024",
         width: "100%",
         paddingHorizontal: 20,
@@ -455,7 +461,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
     darkSubItemText: {
-        color:"orange",
+        color: "orange",
         paddingVertical: 10
     },
     langMenu: {
@@ -481,7 +487,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row"
     },
-    darkLanguageSelect:{
+    darkLanguageSelect: {
         borderWidth: 2.5,
         borderColor: "#4A4A4A",
         padding: 10,
@@ -503,7 +509,7 @@ const styles = StyleSheet.create({
         color: "#2E2E2E",
         paddingHorizontal: 4
     },
-    darkLanguageTitle:{
+    darkLanguageTitle: {
         position: "absolute",
         top: -10,
         left: 12,
@@ -516,7 +522,7 @@ const styles = StyleSheet.create({
         color: "#4A4A4A"
     },
     darkLanguage: {
-        color:"white"
+        color: "white"
     },
     darkIcon: {
         width: 30,
