@@ -9,7 +9,7 @@ export default function Help() {
     const [languagesShown, setLanguagesShown] = React.useState(false)
     const [scrollEnabled, setScrollEnabled] = React.useState(true);
     const [language , setLanguage] = React.useState("Türkçe")
-    const { t } = useTranslation();
+    const { t , i18n } = useTranslation();
 
     return (
         <View style={{ flex: 1, backgroundColor: "white", paddingBottom: 20 }}>
@@ -173,13 +173,13 @@ export default function Help() {
                 </View>
                 {languagesShown && <View style={styles.languagesMenu}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Pressable onPress={() => {setLanguage("Deutch"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Deutch" && styles.selectedLang]}>
+                        <Pressable onPress={() => {i18n.changeLanguage("de"); setLanguage("Deutch"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Deutch" && styles.selectedLang]}>
                             <Text>Deutch</Text>
                         </Pressable>
-                        <Pressable onPress={() => {setLanguage("English"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "English" && styles.selectedLang]}>
+                        <Pressable onPress={() => {i18n.changeLanguage("en"); setLanguage("English"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "English" && styles.selectedLang]}>
                             <Text>English</Text>
                         </Pressable>
-                        <Pressable onPress={() => {setLanguage("Türkçe"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Türkçe" && styles.selectedLang]}>
+                        <Pressable onPress={() => {i18n.changeLanguage("tr"); setLanguage("Türkçe"); setLanguagesShown(prev => !prev); setScrollEnabled(true)}} style={[styles.lang , language === "Türkçe" && styles.selectedLang]}>
                             <Text>Türkçe</Text>
                         </Pressable>
                     </ScrollView>

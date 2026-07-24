@@ -6,7 +6,7 @@ import de from "./locales/de";
 import en from "./locales/en";
 import tr from "./locales/tr";
 
-const lng = getLocales()[0]?.languageCode ?? "de";
+const lng = getLocales()[0]?.languageCode ?? "en";
 
 i18n
   .use(initReactI18next)
@@ -16,8 +16,8 @@ i18n
       tr,
       de,
     },
-    lng:"de",
-    fallbackLng: "tr",
+    lng,
+    fallbackLng: "en",
     supportedLngs: ["en", "tr", "de"],
     defaultNS: "translation",
     interpolation: {
